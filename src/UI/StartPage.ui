@@ -282,7 +282,7 @@ padding-top:5px;</string>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="rcs.qrc"/>
+  <include location="../../rcs/rcs.qrc"/>
  </resources>
  <connections/>
 </ui>
