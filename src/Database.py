@@ -20,18 +20,15 @@ class Database:
             attrs = ','.join([':'+s for s in attr.keys()])
             cursor.execute("INSERT INTO {} VALUES ({})".format(table, attrs), attr)
     
-    
+
     @staticmethod
     def search(table: str, **attr):
+        retVal = "Query not found"
         with connect:
             attrs = ','.join([s+'=:'+s for s in attr.keys()])
             cursor.execute("SELECT * FROM {} WHERE {}".format(table, attrs), attr)
 
-        if table=='Itinerary':
-            retVal = [Itinerary(x[0], x[1], x[2], x[3], x[4]) for x in cursor.fetchall()]
-        elif table=='ObjekWisata':
-            retVal = []
-
+        retVal = cursor.fetchall()
         return retVal
 
 
