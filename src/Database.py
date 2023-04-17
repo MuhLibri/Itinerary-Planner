@@ -18,22 +18,30 @@ class Database:
         with connect:
             attrs = ','.join([':'+s for s in attr.keys()])
             cursor.execute("INSERT INTO {} VALUES ({})".format(table, attrs), attr)
-    
+
+    @staticmethod
+    def update(table: str, **attr):
+        with connect:
+            modifiedAttribute = ','.join([s+'=:'+s for s in attr.keys()])
+            index = modifiedAttribute.find(',')
+            Condition = modifiedAttribute[0:index]
+            modifiedAttribute = modifiedAttribute[index+1:len(modifiedAttribute)]
+            cursor.execute("UPDATE {} SET {} WHERE {}".format(table, modifiedAttribute, Condition), attr)   
     
     @staticmethod
     def search(table: str, **attr):
-        retVal = "Query not found"
         with connect:
-            attrs = ','.join([s+'=:'+s for s in attr.keys()])
-            cursor.execute("SELECT * FROM {} WHERE {}".format(table, attrs), attr)
-
+            if (bool(attr)):
+                attrs = ','.join([s+'=:'+s for s in attr.keys()])
+                cursor.execute("SELECT * FROM {} WHERE {}".format(table, attrs), attr)
+            else:
+                cursor.execute("SELECT * FROM {}".format(table))
         retVal = cursor.fetchall()
         return retVal
-    
-    
+
     @staticmethod
     def count(table: str):
-        cursor.execute("SELECT COUNT(*) FROM {}", table)
+        cursor.execute("SELECT COUNT(*) FROM {}".format(table))
         return cursor.fetchone()[0]
 
     @staticmethod   
