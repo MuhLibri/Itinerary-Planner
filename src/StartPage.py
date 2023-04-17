@@ -9,9 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from AddItineraryWindow import Ui_AddItineraryWindow
 
 
 class Ui_MainWindow(object):
+    def switchWin(self, MainWindow):
+            widget.setCurrentIndex(widget.currentIndex() + 1)
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(824, 672)
@@ -145,9 +149,13 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.pushButton.clicked.connect(self.switchWin)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        
+            
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -159,14 +167,20 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(1, _translate("MainWindow", "Daerah Wisata"))
         self.pushButton.setText(_translate("MainWindow", "Buat Baru"))
         self.pushButton_2.setText(_translate("MainWindow", "Riwayat"))
-import rcs_rc
+#import rcs_rc
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+    window2 = QtWidgets.QMainWindow()
+    widget = QtWidgets.QStackedWidget()
     ui = Ui_MainWindow()
+    ui2 = Ui_AddItineraryWindow()
     ui.setupUi(MainWindow)
+    ui2.setupUi(window2)
+    widget.addWidget(MainWindow)
+    widget.addWidget(window2)
     MainWindow.show()
     sys.exit(app.exec_())
