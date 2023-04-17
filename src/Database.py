@@ -1,6 +1,5 @@
 import sqlite3
 import os.path
-from Itinerary import *
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -31,6 +30,10 @@ class Database:
         retVal = cursor.fetchall()
         return retVal
 
+    @staticmethod
+    def count(table: str):
+        cursor.execute("SELECT COUNT(*) FROM {}", table)
+        return cursor.fetchone()[0]
 
     @staticmethod   
     def close():
