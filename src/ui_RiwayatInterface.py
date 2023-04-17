@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Riwayat(object):
+    riwayatCount = 0
     def setupUi(self, Riwayat):
         Riwayat.setObjectName("Riwayat")
         Riwayat.resize(800, 578)
@@ -53,12 +54,16 @@ class Ui_Riwayat(object):
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
         self.scrollArea.setGeometry(QtCore.QRect(-1, 76, 801, 501))
         self.scrollArea.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 795, 499))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 799, 499))
+        self.scrollAreaWidgetContents.setAutoFillBackground(False)
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
         self.verticalLayout_3.setContentsMargins(0, 3, 0, -1)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.pushButton_2 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
@@ -69,13 +74,111 @@ class Ui_Riwayat(object):
 
         self.retranslateUi(Riwayat)
         QtCore.QMetaObject.connectSlotsByName(Riwayat)
+    
+
+
+        self.pushButton_2.clicked.connect(self.createNewWidget)
+
+    def createNewWidget(self):
+        newRiwayat = "riwayatFrame" + str(self.riwayatCount)
+        newVertical = "verticalName" + str(self.riwayatCount)
+        newTitle = "title" + str(self.riwayatCount)
+        newDuration = "duration" + str(self.riwayatCount)
+        newDestination = "destination" + str(self.riwayatCount)
+        newUbah = "ubah" + str(self.riwayatCount)
+        newCatatan = "catatan" + str(self.riwayatCount)
+        self.riwayatCount += 1
+
+        self.riwayatFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.riwayatFrame.sizePolicy().hasHeightForWidth())
+        self.riwayatFrame.setSizePolicy(sizePolicy)
+        self.riwayatFrame.setMinimumSize(QtCore.QSize(800, 150))
+        self.riwayatFrame.setMaximumSize(QtCore.QSize(800, 150))
+        self.riwayatFrame.setStyleSheet("#" + newRiwayat + "{\n"
+"background-color: white;\n"
+"border: 1px solid black;\n"
+"}")
+        self.riwayatFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.riwayatFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.riwayatFrame.setObjectName(newRiwayat)
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.riwayatFrame)
+        self.verticalLayout_4.setObjectName(newVertical)
+        self.TitleLabel = QtWidgets.QLabel(self.riwayatFrame)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+
+        #Setup title
+        self.TitleLabel.setFont(font)
+        self.TitleLabel.setObjectName(newTitle)
+        self.TitleLabel.setText(newTitle)
+        self.verticalLayout_4.addWidget(self.TitleLabel)
+        
+
+        #Setup duration
+        self.DurationLabel = QtWidgets.QLabel(self.riwayatFrame)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.DurationLabel.setFont(font)
+        self.DurationLabel.setObjectName(newDuration)
+        self.DurationLabel.setText(newDuration)
+        self.verticalLayout_4.addWidget(self.DurationLabel)
+
+        #Setup destination
+        self.DestinationLabel = QtWidgets.QLabel(self.riwayatFrame)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.DestinationLabel.setFont(font)
+        self.DestinationLabel.setObjectName(newDestination)
+        self.DestinationLabel.setText(newDestination)
+        self.verticalLayout_4.addWidget(self.DestinationLabel)
+
+        #Setup ubah
+        self.UbahLabel = QtWidgets.QLabel(self.riwayatFrame)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setUnderline(True)
+        self.UbahLabel.setFont(font)
+        self.UbahLabel.setStyleSheet("color:rgb(12, 190, 255)")
+        self.UbahLabel.setObjectName(newUbah)
+        self.UbahLabel.setText("Ubah")
+        self.verticalLayout_4.addWidget(self.UbahLabel)
+
+        #Setup catatan
+        self.CatatanLabel = QtWidgets.QLabel(self.riwayatFrame)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setUnderline(True)
+        self.CatatanLabel.setFont(font)
+        self.CatatanLabel.setStyleSheet("color:rgb(12, 190, 255)")
+        self.CatatanLabel.setObjectName(newCatatan)
+        self.CatatanLabel.setText("Catatan")
+        self.verticalLayout_4.addWidget(self.CatatanLabel)
+
+        self.verticalLayout_3.addWidget(self.riwayatFrame, QtCore.Qt.AlignTop)
+        self.riwayatFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        self.riwayatFrame.setMinimumSize(QtCore.QSize(745, 0))
+        self.riwayatFrame.setMaximumSize(QtCore.QSize(745, 50))
+        self.riwayatFrame.setStyleSheet("background-color: white;")
+        self.riwayatFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.riwayatFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.riwayatFrame.setObjectName(newRiwayat)
+        self.verticalLayout_3.addWidget(self.riwayatFrame)
+        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.addStretch()
+
+        setattr(self, newRiwayat, self.riwayatFrame)
 
     def retranslateUi(self, Riwayat):
         _translate = QtCore.QCoreApplication.translate
         Riwayat.setWindowTitle(_translate("Riwayat", "MainWindow"))
         self.pushButton.setText(_translate("Riwayat", "X"))
         self.label.setText(_translate("Riwayat", "Riwayat Itinerary Planner"))
-        self.pushButton_2.setText(_translate("Riwayat", "Debug: add riwayat"))
+        self.pushButton_2.setText(_translate("Riwayat", "PushButton"))
 
 
 if __name__ == "__main__":
