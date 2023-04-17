@@ -29,6 +29,12 @@ class Database:
             cursor.execute("UPDATE {} SET {} WHERE {}".format(table, modifiedAttribute, Condition), attr)   
     
     @staticmethod
+    def delete(table: str, **attr):
+        with connect:
+            attrs = ','.join([s+'=:'+s for s in attr.keys()])
+            cursor.execute("DELETE FROM {} WHERE {}".format(table, attrs), attr)
+
+    @staticmethod
     def search(table: str, **attr):
         with connect:
             if (bool(attr)):
