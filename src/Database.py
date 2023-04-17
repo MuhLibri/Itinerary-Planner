@@ -21,17 +21,23 @@ class Database:
 
 
     @staticmethod
-    def update(table: str, **attr):
+    def update(table: str, dict: dict, **attr):
+        """
+        table is the target table on database, dict are the conditions of the target, **attr are the values to be updated in the table
+        example: update('Riwayat', {'IdItinerary':'000001'}, IdItinerary='000002', Catatan='hai')
+        """
         with connect:
+            condition = ', '.join([a + '=' + "'{}'".format(b) for a,b in dict.items()])
             modifiedAttribute = ','.join([s+'=:'+s for s in attr.keys()])
-            index = modifiedAttribute.find(',')
-            Condition = modifiedAttribute[0:index]
-            modifiedAttribute = modifiedAttribute[index+1:len(modifiedAttribute)]
-            cursor.execute("UPDATE {} SET {} WHERE {}".format(table, modifiedAttribute, Condition), attr)   
+            cursor.execute("UPDATE {} SET {} WHERE {}".format(table, modifiedAttribute, condition), attr) 
 
 
     @staticmethod
     def delete(table: str, **attr):
+        """
+        table is the target table on database, **attr are the conditions for the tuple to be deleted in the table
+        example: delete('Riwayat', IdItinerary='000001')
+        """        
         with connect:
             attrs = ','.join([s+'=:'+s for s in attr.keys()])
             cursor.execute("DELETE FROM {} WHERE {}".format(table, attrs), attr)
@@ -39,6 +45,10 @@ class Database:
 
     @staticmethod
     def search(table: str, **attr):
+        """
+        table is the target table on database, **attr are the conditions of the tuple in the table to be returned (can be empty)
+        example: search('Riwayat', IdItinerary='000001')        
+        """
         with connect:
             if (bool(attr)):
                 attrs = ','.join([s+'=:'+s for s in attr.keys()])
@@ -69,11 +79,19 @@ class Database:
 
 
     @staticmethod
-    def count(table: str):
-        cursor.execute("SELECT COUNT(*) FROM {}".format(table))
+    def count(table: str, **attr):
+        """
+        table is the target table on database, **attr are the conditions of the tuple in the table to be counted (can be empty)
+        example: count('Itinerary', IdItinerary='000001')
+        """
+        if (bool(attr)):
+            attrs = ','.join([s+'=:'+s for s in attr.keys()])
+            cursor.execute("SELECT COUNT(*) FROM {} WHERE {}".format(table, attrs), attr)
+        else:
+            cursor.execute("SELECT COUNT(*) FROM {}".format(table))
         return cursor.fetchone()[0]
 
 
-    @staticmethod   
+    @staticmethod
     def close():
         connect.close()
