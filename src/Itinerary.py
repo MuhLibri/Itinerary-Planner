@@ -1,10 +1,10 @@
 class Itinerary:
-    def __init__(self, idItinerary, waktuAwal, waktuAkhir, objekWisata, transportasi):
+    def __init__(self, idItinerary, waktuAwal, waktuAkhir, namaObjekWisata, idTransportasi):
         self._idItinerary = idItinerary
         self._waktuAwal = waktuAwal
         self._waktuAkhir = waktuAkhir
-        self._objekWisata = objekWisata
-        self._transportasi = transportasi
+        self._namaObjekWisata = namaObjekWisata
+        self._idTransportasi = idTransportasi
     
     @property
     def idItinerary(self):
@@ -19,12 +19,12 @@ class Itinerary:
         return self._waktuAkhir
     
     @property
-    def objekWisata(self):
-        return self._objekWisata
+    def namaObjekWisata(self):
+        return self._namaObjekWisata
     
     @property
-    def transportasi(self):
-        return self._transportasi
+    def idTransportasi(self):
+        return self._idTransportasi
 
     @idItinerary.setter
     def idItinerary(self, idItinerary):
@@ -38,15 +38,13 @@ class Itinerary:
     def waktuAkhir(self, waktuAkhir):
         self._waktuAkhir = waktuAkhir
 
-    @objekWisata.setter
-    def objekWisata(self, objekWisata):
-        self._objekWisata = objekWisata
+    @namaObjekWisata.setter
+    def namaObjekWisata(self, objekWisata):
+        self._namaObjekWisata = objekWisata
 
-    @transportasi.setter
-    def transportasi(self, transportasi):
-        self._transportasi = transportasi
+    @idTransportasi.setter
+    def idTransportasi(self, transportasi):
+        self._idTransportasi = transportasi
 
     def __str__(self):
-        return "IdItinerary: " + self.idItinerary + "\nWaktu Awal: " + self.waktuAwal + "\nWaktu Akhir: " + self.waktuAkhir + "\nObjek Wisata: " + self.objekWisata + "\nId Transportasi: " + self.transportasi
-    
-#Itinerary('000001', 'jam 1, 1 Mei 2023', 'jam 2, 1 Mei 2023', 'Candi Borobudur', '000007')
+        return "Id Itinerary: " + self.idItinerary + "\nWaktu Awal: " + self.waktuAwal + "\nWaktu Akhir: " + self.waktuAkhir + "\nObjek Wisata: " + self.namaObjekWisata + "\nId Transportasi: " + self.idTransportasi
