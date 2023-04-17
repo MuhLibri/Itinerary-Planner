@@ -9,11 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import ItineraryController
 
-
-class Ui_AddItineraryWindow(object):
+class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Add Itinerary")
+        Dialog.setObjectName("Dialog")
         Dialog.resize(640, 480)
         Dialog.setStyleSheet("background-color: rgb(255, 255, 255);")
         Dialog.setSizeGripEnabled(False)
@@ -23,9 +23,9 @@ class Ui_AddItineraryWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.pushButton = QtWidgets.QPushButton(self.frame)
-        self.pushButton.setGeometry(QtCore.QRect(10, 10, 60, 50))
-        self.pushButton.setStyleSheet("QPushButton{\n"
+        self.closeButton = QtWidgets.QPushButton(self.frame)
+        self.closeButton.setGeometry(QtCore.QRect(10, 10, 60, 50))
+        self.closeButton.setStyleSheet("QPushButton{\n"
 "color: white;\n"
 "    background-color: rgb(42, 174, 255);\n"
 "    border: none;\n"
@@ -37,8 +37,8 @@ class Ui_AddItineraryWindow(object):
 "QPushButton:pressed{\n"
 "background-color: rgb(25, 105, 152);\n"
 "}")
-        self.pushButton.setFlat(True)
-        self.pushButton.setObjectName("pushButton")
+        self.closeButton.setFlat(True)
+        self.closeButton.setObjectName("closeButton")
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setGeometry(QtCore.QRect(170, 15, 260, 50))
         self.label.setStyleSheet("QLabel{\n"
@@ -54,9 +54,9 @@ class Ui_AddItineraryWindow(object):
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
-        self.pushButton_2 = QtWidgets.QPushButton(self.frame_2)
-        self.pushButton_2.setGeometry(QtCore.QRect(560, 330, 50, 50))
-        self.pushButton_2.setStyleSheet("QPushButton{\n"
+        self.submitButton = QtWidgets.QPushButton(self.frame_2)
+        self.submitButton.setGeometry(QtCore.QRect(560, 330, 50, 50))
+        self.submitButton.setStyleSheet("QPushButton{\n"
 "color: white;\n"
 "background-color: rgb(150, 150, 150);\n"
 "border-color: rgb(42, 174, 255);\n"
@@ -69,33 +69,34 @@ class Ui_AddItineraryWindow(object):
 "QPushButton:pressed{\n"
 "background-color: rgb(0,0,0);\n"
 "}")
-        self.pushButton_2.setDefault(False)
-        self.pushButton_2.setFlat(True)
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.submitButton.setDefault(False)
+        self.submitButton.setFlat(True)
+        self.submitButton.setObjectName("submitButton")
+        self.submitButton.clicked.connect(self.submitButtonClicked)
         self.frame_3 = QtWidgets.QFrame(self.frame_2)
-        self.frame_3.setGeometry(QtCore.QRect(40, 20, 531, 221))
+        self.frame_3.setGeometry(QtCore.QRect(40, 20, 531, 281))
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
-        self.lineEdit = QtWidgets.QLineEdit(self.frame_3)
-        self.lineEdit.setGeometry(QtCore.QRect(10, 10, 500, 30))
-        self.lineEdit.setStyleSheet("QLineEdit{\n"
+        self.addDaerahWisata = QtWidgets.QLineEdit(self.frame_3)
+        self.addDaerahWisata.setGeometry(QtCore.QRect(10, 10, 500, 30))
+        self.addDaerahWisata.setStyleSheet("QLineEdit{\n"
 "    border: 2px solid rgb(0, 0, 0);\n"
 "    border-radius: 10px;\n"
 "}")
-        self.lineEdit.setClearButtonEnabled(True)
-        self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.frame_3)
-        self.lineEdit_2.setGeometry(QtCore.QRect(10, 60, 500, 30))
-        self.lineEdit_2.setStyleSheet("QLineEdit{\n"
+        self.addDaerahWisata.setClearButtonEnabled(True)
+        self.addDaerahWisata.setObjectName("addDaerahWisata")
+        self.addObjekWisata = QtWidgets.QLineEdit(self.frame_3)
+        self.addObjekWisata.setGeometry(QtCore.QRect(10, 60, 500, 30))
+        self.addObjekWisata.setStyleSheet("QLineEdit{\n"
 "    border: 2px solid rgb(0, 0, 0);\n"
 "    border-radius: 10px;\n"
 "}")
-        self.lineEdit_2.setClearButtonEnabled(True)
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.dateEdit = QtWidgets.QDateEdit(self.frame_3)
-        self.dateEdit.setGeometry(QtCore.QRect(140, 110, 370, 30))
-        self.dateEdit.setStyleSheet("QDateEdit\n"
+        self.addObjekWisata.setClearButtonEnabled(True)
+        self.addObjekWisata.setObjectName("addObjekWisata")
+        self.tanggalKunjunganDate = QtWidgets.QDateEdit(self.frame_3)
+        self.tanggalKunjunganDate.setGeometry(QtCore.QRect(140, 110, 370, 30))
+        self.tanggalKunjunganDate.setStyleSheet("QDateEdit\n"
 "{\n"
 "border : 2px solid black;\n"
 "background-color : white;\n"
@@ -104,34 +105,60 @@ class Ui_AddItineraryWindow(object):
 "border-top-right-radius: 10px;\n"
 "border-bottom-right-radius: 10px;\n"
 "}")
-        self.dateEdit.setAlignment(QtCore.Qt.AlignCenter)
-        self.dateEdit.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
-        self.dateEdit.setObjectName("dateEdit")
-        self.lineEdit_4 = QtWidgets.QLineEdit(self.frame_3)
-        self.lineEdit_4.setGeometry(QtCore.QRect(10, 160, 500, 30))
-        self.lineEdit_4.setStyleSheet("QLineEdit{\n"
+        self.tanggalKunjunganDate.setAlignment(QtCore.Qt.AlignCenter)
+        self.tanggalKunjunganDate.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.tanggalKunjunganDate.setObjectName("tanggalKunjunganDate")
+        self.addTransportasi = QtWidgets.QLineEdit(self.frame_3)
+        self.addTransportasi.setGeometry(QtCore.QRect(10, 200, 500, 30))
+        self.addTransportasi.setStyleSheet("QLineEdit{\n"
 "    border: 2px solid rgb(0, 0, 0);\n"
 "    border-radius: 10px;\n"
 "}")
-        self.lineEdit_4.setClearButtonEnabled(True)
-        self.lineEdit_4.setObjectName("lineEdit_4")
-        self.lineEdit.raise_()
-        self.lineEdit_2.raise_()
-        self.lineEdit_4.raise_()
-        self.dateEdit.raise_()
-        self.label_2 = QtWidgets.QLabel(self.frame_2)
-        self.label_2.setGeometry(QtCore.QRect(50, 130, 131, 30))
-        self.label_2.setStyleSheet("QLabel{\n"
+        self.addTransportasi.setClearButtonEnabled(True)
+        self.addTransportasi.setObjectName("addTransportasi")
+        self.tanggalKunjunganLabel = QtWidgets.QLabel(self.frame_3)
+        self.tanggalKunjunganLabel.setGeometry(QtCore.QRect(10, 110, 131, 30))
+        self.tanggalKunjunganLabel.setStyleSheet("QLabel{\n"
 "border-Left: 2px solid black;\n"
 "border-Top: 2px solid black;\n"
 "border-Bottom: 2px solid black;\n"
 "border-bottom-left-radius: 10px;\n"
 "border-top-left-radius: 10px;\n"
 "}")
-        self.label_2.setObjectName("label_2")
+        self.tanggalKunjunganLabel.setObjectName("tanggalKunjunganLabel")
+        self.tanggalSelesaiDate = QtWidgets.QDateEdit(self.frame_3)
+        self.tanggalSelesaiDate.setGeometry(QtCore.QRect(140, 155, 370, 30))
+        self.tanggalSelesaiDate.setStyleSheet("QDateEdit\n"
+"{\n"
+"border : 2px solid black;\n"
+"background-color : white;\n"
+"padding : 5px;\n"
+"    border-left-color: rgb(255, 255, 255);\n"
+"border-top-right-radius: 10px;\n"
+"border-bottom-right-radius: 10px;\n"
+"}")
+        self.tanggalSelesaiDate.setAlignment(QtCore.Qt.AlignCenter)
+        self.tanggalSelesaiDate.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.tanggalSelesaiDate.setObjectName("tanggalSelesaiDate")
+        self.tanggalSelesaiLabel = QtWidgets.QLabel(self.frame_3)
+        self.tanggalSelesaiLabel.setGeometry(QtCore.QRect(10, 155, 131, 30))
+        self.tanggalSelesaiLabel.setStyleSheet("QLabel{\n"
+"border-Left: 2px solid black;\n"
+"border-Top: 2px solid black;\n"
+"border-Bottom: 2px solid black;\n"
+"border-bottom-left-radius: 10px;\n"
+"border-top-left-radius: 10px;\n"
+"}")
+        self.tanggalSelesaiLabel.setObjectName("tanggalSelesaiLabel")
+        self.addDaerahWisata.raise_()
+        self.addObjekWisata.raise_()
+        self.addTransportasi.raise_()
+        self.tanggalKunjunganDate.raise_()
+        self.tanggalKunjunganLabel.raise_()
+        self.tanggalSelesaiDate.raise_()
+        self.tanggalSelesaiLabel.raise_()
         self.frame_3.raise_()
-        self.pushButton_2.raise_()
-        self.label_2.raise_()
+        self.submitButton.raise_()
         self.frame_2.raise_()
         self.frame.raise_()
 
@@ -141,20 +168,41 @@ class Ui_AddItineraryWindow(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.pushButton.setText(_translate("Dialog", "X"))
+        self.closeButton.setText(_translate("Dialog", "X"))
         self.label.setText(_translate("Dialog", "Itinerary Planner"))
-        self.pushButton_2.setText(_translate("Dialog", "+"))
-        self.lineEdit.setPlaceholderText(_translate("Dialog", "Masukkan Daerah Wisata"))
-        self.lineEdit_2.setPlaceholderText(_translate("Dialog", "Masukkan Objek Wisata"))
-        self.lineEdit_4.setPlaceholderText(_translate("Dialog", "Pilih Transportasi"))
-        self.label_2.setText(_translate("Dialog", "Tanggal Kunjungan:"))
+        self.submitButton.setText(_translate("Dialog", "+"))
+        self.addDaerahWisata.setPlaceholderText(_translate("Dialog", "Masukkan Daerah Wisata"))
+        self.addObjekWisata.setPlaceholderText(_translate("Dialog", "Masukkan Objek Wisata"))
+        self.addTransportasi.setPlaceholderText(_translate("Dialog", "Pilih Transportasi"))
+        self.tanggalKunjunganLabel.setText(_translate("Dialog", "Tanggal Kunjungan:"))
+        self.tanggalSelesaiLabel.setText(_translate("Dialog", "Tanggal Selesai:"))
 
+    def submitButtonClicked(self):
+        daerahWisata = self.addDaerahWisata.text()
+        objekWisata = self.addObjekWisata.text()
+        tanggalKunjungan = self.tanggalKunjunganDate.text()
+        tanggalSelesai = self.tanggalSelesaiDate.text()
+        transportasi = self.addTransportasi.text()
+        
+        if daerahWisata == "" or objekWisata == "" or tanggalKunjungan == "" or tanggalSelesai == "" or transportasi == "":
+            self.errorDialog = QtWidgets.QErrorMessage()
+            self.errorDialog.setWindowTitle("Error")
+            self.errorDialog.showMessage("Mohon isi semua data")
+        else:
+            print("added")
+            self.itineraryController=ItineraryController.ItineraryController()
+            self.itineraryController.addItinerary(daerahWisata, objekWisata, tanggalKunjungan, tanggalSelesai, transportasi)
+            self.itineraryController.insertItinerary()
+            self.addDaerahWisata.setText("")
+            self.addObjekWisata.setText("")
+            self.addTransportasi.setText("")
+        #     ItineraryController.ItineraryController.addItinerary(str(0),daerahWisata, objekWisata, tanggalKunjungan, tanggalSelesai, transportasi)
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_AddItineraryWindow()
+    ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
