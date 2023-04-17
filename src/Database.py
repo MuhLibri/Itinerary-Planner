@@ -17,19 +17,23 @@ class Database:
         example: insert('Riwayat', IdItinerary='000001', TanggalBuat='27/05/2023', Catatan='Asik')
         """
         with connect:
-            if (table == "Itinerary"):
-                cursor.execute("""INSERT INTO Itinerary VALUES 
-                    (:IdItinerary, :WaktuAwal, :WaktuAkhir, :NamaObjekWisata, :IdTransportasi)""", 
-                    {'IdItinerary':attr['IdItinerary'], 'WaktuAwal':attr['WaktuAwal'], 'WaktuAkhir':attr['WaktuAkhir'], 'NamaObjekWisata':attr['NamaObjekWisata'], 'IdTransportasi':attr['IdTransportasi']})
+            attrs = ','.join([':'+s for s in attr.keys()])
+            cursor.execute("INSERT INTO {} VALUES ({})".format(table, attrs), attr)
+    
     
     @staticmethod
     def search(table: str, **attr):
         with connect:
-            if (table == "Itinerary"):
-                cursor.execute("SELECT * FROM Itinerary WHERE IdItinerary=:IdItinerary", {'IdItinerary': attr['IdItinerary']})
-                retVal = [Itinerary(x[0], x[1], x[2], x[3], x[4]) for x in cursor.fetchall()]
+            attrs = ','.join([s+'=:'+s for s in attr.keys()])
+            cursor.execute("SELECT * FROM {} WHERE {}".format(table, attrs), attr)
+
+        if table=='Itinerary':
+            retVal = [Itinerary(x[0], x[1], x[2], x[3], x[4]) for x in cursor.fetchall()]
+        elif table=='ObjekWisata':
+            retVal = []
 
         return retVal
+
 
     @staticmethod   
     def close():
