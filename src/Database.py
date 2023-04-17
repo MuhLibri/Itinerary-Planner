@@ -19,6 +19,7 @@ class Database:
             attrs = ','.join([':'+s for s in attr.keys()])
             cursor.execute("INSERT INTO {} VALUES ({})".format(table, attrs), attr)
 
+
     @staticmethod
     def update(table: str, **attr):
         with connect:
@@ -27,12 +28,14 @@ class Database:
             Condition = modifiedAttribute[0:index]
             modifiedAttribute = modifiedAttribute[index+1:len(modifiedAttribute)]
             cursor.execute("UPDATE {} SET {} WHERE {}".format(table, modifiedAttribute, Condition), attr)   
-    
+
+
     @staticmethod
     def delete(table: str, **attr):
         with connect:
             attrs = ','.join([s+'=:'+s for s in attr.keys()])
             cursor.execute("DELETE FROM {} WHERE {}".format(table, attrs), attr)
+
 
     @staticmethod
     def search(table: str, **attr):
@@ -45,11 +48,34 @@ class Database:
         retVal = cursor.fetchall()
         return retVal
 
+
+    @staticmethod
+    def crossproduct(*tables):
+        with connect:
+            q = ','.join(tables)
+            print(q)
+            cursor.execute(f"SELECT * FROM {q}")
+        retVal = cursor.fetchall()
+        return retVal
+
+
+    @staticmethod
+    def naturaljoin(*tables):
+        with connect:
+            q = ' NATURAL INNER JOIN '.join(tables)
+            cursor.execute(f"SELECT * FROM {q}")
+        retVal = cursor.fetchall()
+        return retVal
+
+
     @staticmethod
     def count(table: str):
         cursor.execute("SELECT COUNT(*) FROM {}".format(table))
         return cursor.fetchone()[0]
 
+
     @staticmethod   
     def close():
         connect.close()
+
+print(Database.naturaljoin("Daerah", "ObjekWisata", "Transportasi"))
