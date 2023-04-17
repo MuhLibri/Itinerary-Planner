@@ -77,5 +77,3 @@ class Database:
     @staticmethod   
     def close():
         connect.close()
-
-print(Database.naturaljoin("Daerah", "ObjekWisata", "Transportasi"))
