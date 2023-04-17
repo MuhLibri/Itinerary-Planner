@@ -31,25 +31,11 @@ class Database:
         return retVal
     
 
+    @staticmethod
     def count(table: str):
-        count = -1
-        if (table == "Riwayat"):
-            cursor.execute("SELECT COUNT(*) FROM Riwayat")
-            count = cursor.fetchone()[0]
-        elif (table == "Itinerary"):
-            cursor.execute("SELECT COUNT(*) FROM Itinerary")
-            count = cursor.fetchone()[0]
-        elif (table == "ObjekWisata"):
-            cursor.execute("SELECT COUNT(*) FROM ObjekWisata")
-            count = cursor.fetchone()[0]
-        elif (table == "Daerah"):
-            cursor.execute("SELECT COUNT(*) FROM Daerah")
-            count = cursor.fetchone()[0]
-        elif (table == "Transportasi"):
-            cursor.execute("SELECT COUNT(*) FROM Transportasi")
-            count = cursor.fetchone()[0]
-            
-        return count
+        cursor.execute("SELECT COUNT(*) FROM {}", table)
+        return cursor.fetchone()[0]
+
 
     @staticmethod
     def count(table: str):
