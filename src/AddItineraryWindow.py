@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import ItineraryController
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -187,7 +188,15 @@ class Ui_Dialog(object):
             self.errorDialog = QtWidgets.QErrorMessage()
             self.errorDialog.setWindowTitle("Error")
             self.errorDialog.showMessage("Mohon isi semua data")
-            
+        else:
+            print("added")
+            self.itineraryController=ItineraryController.ItineraryController()
+            self.itineraryController.addItinerary(daerahWisata, objekWisata, tanggalKunjungan, tanggalSelesai, transportasi)
+            self.itineraryController.insertItinerary()
+            self.addDaerahWisata.setText("")
+            self.addObjekWisata.setText("")
+            self.addTransportasi.setText("")
+        #     ItineraryController.ItineraryController.addItinerary(str(0),daerahWisata, objekWisata, tanggalKunjungan, tanggalSelesai, transportasi)
 
 if __name__ == "__main__":
     import sys
