@@ -28,24 +28,24 @@ class MainWindow(QMainWindow):
         newCatatan = "catatan" + str(self.riwayatCount)
         self.riwayatCount += 1
 
-        self.frame_2 = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents)
+        self.riwayatFrame = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
-        self.frame_2.setSizePolicy(sizePolicy)
-        self.frame_2.setMinimumSize(QtCore.QSize(800, 150))
-        self.frame_2.setMaximumSize(QtCore.QSize(800, 150))
-        self.frame_2.setStyleSheet("#" + newRiwayat + "{\n"
+        sizePolicy.setHeightForWidth(self.riwayatFrame.sizePolicy().hasHeightForWidth())
+        self.riwayatFrame.setSizePolicy(sizePolicy)
+        self.riwayatFrame.setMinimumSize(QtCore.QSize(800, 150))
+        self.riwayatFrame.setMaximumSize(QtCore.QSize(800, 150))
+        self.riwayatFrame.setStyleSheet("#" + newRiwayat + "{\n"
 "background-color: white;\n"
 "border: 1px solid black;\n"
 "}")
-        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_2.setObjectName(newRiwayat)
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame_2)
+        self.riwayatFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.riwayatFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.riwayatFrame.setObjectName(newRiwayat)
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.riwayatFrame)
         self.verticalLayout_4.setObjectName(newVertical)
-        self.TitleLabel = QtWidgets.QLabel(self.frame_2)
+        self.TitleLabel = QtWidgets.QLabel(self.riwayatFrame)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -59,7 +59,7 @@ class MainWindow(QMainWindow):
         
 
         #Setup duration
-        self.DurationLabel = QtWidgets.QLabel(self.frame_2)
+        self.DurationLabel = QtWidgets.QLabel(self.riwayatFrame)
         font = QtGui.QFont()
         font.setPointSize(9)
         self.DurationLabel.setFont(font)
@@ -68,7 +68,7 @@ class MainWindow(QMainWindow):
         self.verticalLayout_4.addWidget(self.DurationLabel)
 
         #Setup destination
-        self.DestinationLabel = QtWidgets.QLabel(self.frame_2)
+        self.DestinationLabel = QtWidgets.QLabel(self.riwayatFrame)
         font = QtGui.QFont()
         font.setPointSize(9)
         self.DestinationLabel.setFont(font)
@@ -77,7 +77,7 @@ class MainWindow(QMainWindow):
         self.verticalLayout_4.addWidget(self.DestinationLabel)
 
         #Setup ubah
-        self.UbahLabel = QtWidgets.QLabel(self.frame_2)
+        self.UbahLabel = QtWidgets.QLabel(self.riwayatFrame)
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setUnderline(True)
@@ -88,7 +88,7 @@ class MainWindow(QMainWindow):
         self.verticalLayout_4.addWidget(self.UbahLabel)
 
         #Setup catatan
-        self.CatatanLabel = QtWidgets.QLabel(self.frame_2)
+        self.CatatanLabel = QtWidgets.QLabel(self.riwayatFrame)
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setUnderline(True)
@@ -98,17 +98,19 @@ class MainWindow(QMainWindow):
         self.CatatanLabel.setText("Catatan")
         self.verticalLayout_4.addWidget(self.CatatanLabel)
 
-        self.ui.verticalLayout_3.addWidget(self.frame_2, 0, QtCore.Qt.AlignTop)
-        self.frame_2 = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents)
-        self.frame_2.setMinimumSize(QtCore.QSize(750, 100))
-        self.frame_2.setMaximumSize(QtCore.QSize(750, 100))
-        self.frame_2.setStyleSheet("background-color: white;")
-        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_2.setObjectName(newRiwayat)
-        self.ui.verticalLayout_3.addWidget(self.frame_2)
+        self.ui.verticalLayout_3.addWidget(self.riwayatFrame, QtCore.Qt.AlignTop)
+        self.riwayatFrame = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents)
+        self.riwayatFrame.setMinimumSize(QtCore.QSize(745, 0))
+        self.riwayatFrame.setMaximumSize(QtCore.QSize(745, 50))
+        self.riwayatFrame.setStyleSheet("background-color: white;")
+        self.riwayatFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.riwayatFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.riwayatFrame.setObjectName(newRiwayat)
+        self.ui.verticalLayout_3.addWidget(self.riwayatFrame)
+        self.ui.verticalLayout_3.setSpacing(0)
+        self.ui.verticalLayout_3.addStretch()
 
-        setattr(self.ui, newRiwayat, self.frame_2)
+        setattr(self.ui, newRiwayat, self.riwayatFrame)
 
 
 if __name__ == "__main__":
