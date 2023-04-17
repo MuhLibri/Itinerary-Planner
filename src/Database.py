@@ -30,13 +30,7 @@ class Database:
         retVal = cursor.fetchall()
         return retVal
     
-
-    @staticmethod
-    def count(table: str):
-        cursor.execute("SELECT COUNT(*) FROM {}", table)
-        return cursor.fetchone()[0]
-
-
+    
     @staticmethod
     def count(table: str):
         cursor.execute("SELECT COUNT(*) FROM {}", table)
