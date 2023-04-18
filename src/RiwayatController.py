@@ -15,6 +15,6 @@ class RiwayatController:
     @staticmethod
     def searchRiwayat(idItinerary):
         queryRiwayat = Database.search("Riwayat", IdItinerary=idItinerary)
-        queryLembarItinerary = ItineraryController(idItinerary)
-        riwayat = Riwayat(queryLembarItinerary, queryRiwayat[1], queryRiwayat[2])
+        queryLembarItinerary = ItineraryController.searchLembarItinerary(idItinerary)
+        riwayat = Riwayat(queryLembarItinerary, queryRiwayat[0][1], queryRiwayat[0][2])
         return riwayat
