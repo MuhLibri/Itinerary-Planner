@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ObjekWisata</class>
- <widget class="QMainWindow" name="ObjekWisata">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,6 +14,30 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>80</y>
+      <width>801</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>799</width>
+       <height>499</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3"/>
+    </widget>
+   </widget>
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
@@ -79,7 +103,7 @@ color: white;
 }</string>
      </property>
      <property name="text">
-      <string>Objek Wisata</string>
+      <string>Daerah Wisata</string>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -131,35 +155,11 @@ background-color: rgb(25, 105, 152);
       <string/>
      </property>
      <property name="placeholderText">
-      <string>Cari Objek Wisata</string>
+      <string>Cari Daerah Wisata</string>
      </property>
      <property name="clearButtonEnabled">
       <bool>true</bool>
      </property>
-    </widget>
-   </widget>
-   <widget class="QScrollArea" name="scrollArea">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>80</y>
-      <width>801</width>
-      <height>501</height>
-     </rect>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>799</width>
-       <height>499</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3"/>
     </widget>
    </widget>
   </widget>

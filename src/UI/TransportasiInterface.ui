@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ObjekWisata</class>
- <widget class="QMainWindow" name="ObjekWisata">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -79,7 +79,7 @@ color: white;
 }</string>
      </property>
      <property name="text">
-      <string>Objek Wisata</string>
+      <string>Transportasi</string>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -131,7 +131,7 @@ background-color: rgb(25, 105, 152);
       <string/>
      </property>
      <property name="placeholderText">
-      <string>Cari Objek Wisata</string>
+      <string>Cari Transportasi</string>
      </property>
      <property name="clearButtonEnabled">
       <bool>true</bool>
