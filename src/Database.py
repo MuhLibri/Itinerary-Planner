@@ -44,15 +44,22 @@ class Database:
 
 
     @staticmethod
-    def search(table: str, **attr):
+    def search(table: str, ignore_case: bool = False, starts_with: bool = False, **attr):
         """
         table is the target table on database, **attr are the conditions of the tuple in the table to be returned (can be empty)
         example: search('Riwayat', IdItinerary='000001')        
         """
         with connect:
+            ignore_case_q = ""
             if (bool(attr)):
-                attrs = ','.join([s+'=:'+s for s in attr.keys()])
-                cursor.execute("SELECT * FROM {} WHERE {}".format(table, attrs), attr)
+                if starts_with:
+                    attrs = ' AND '.join([s+' LIKE "'+attr[s]+'%"' for s in attr.keys()])
+                    print(attrs)
+                else:
+                    ignore_case_q = ignore_case*" COLLATE NOCASE"
+                    attrs = ','.join([s+'=:'+s for s in attr.keys()])
+                
+                cursor.execute("SELECT * FROM {} WHERE {} {}".format(table, attrs, ignore_case_q), attr)
             else:
                 cursor.execute("SELECT * FROM {}".format(table))
         retVal = cursor.fetchall()
@@ -79,14 +86,15 @@ class Database:
 
 
     @staticmethod
-    def count(table: str, **attr):
+    def count(table: str, ignore_case: bool = False, **attr):
         """
         table is the target table on database, **attr are the conditions of the tuple in the table to be counted (can be empty)
         example: count('Itinerary', IdItinerary='000001')
         """
         if (bool(attr)):
+            ignore_case_q = ignore_case*" COLLATE NOCASE"
             attrs = ','.join([s+'=:'+s for s in attr.keys()])
-            cursor.execute("SELECT COUNT(*) FROM {} WHERE {}".format(table, attrs), attr)
+            cursor.execute("SELECT COUNT(*) FROM {} WHERE {} {}".format(table, attrs, ignore_case_q), attr)
         else:
             cursor.execute("SELECT COUNT(*) FROM {}".format(table))
         return cursor.fetchone()[0]
