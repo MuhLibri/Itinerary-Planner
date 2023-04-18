@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'DaerahWisataInterface.ui'
+# Form implementation generated from reading ui file 'TransportasiInterface.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -11,23 +11,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import Database
 
-class Ui_DaerahWisata(object):
-    daerahWisataTable=Database.Database.search("Daerah")
+
+class Ui_Transportasi(object):
+    transportTable=Database.Database.search("Transportasi")
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 578)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
-        self.scrollArea.setGeometry(QtCore.QRect(0, 80, 801, 501))
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 799, 499))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(0, 0, 801, 80))
         self.frame.setStyleSheet("background-color: rgb(42, 174, 255);")
@@ -81,79 +72,104 @@ class Ui_DaerahWisata(object):
         self.lineEdit.setText("")
         self.lineEdit.setClearButtonEnabled(True)
         self.lineEdit.setObjectName("lineEdit")
+        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
+        self.scrollArea.setGeometry(QtCore.QRect(0, 80, 801, 501))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 799, 499))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         MainWindow.setCentralWidget(self.centralwidget)
         self.pushButton_2.clicked.connect(self.searchButtonClicked)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        for e in self.daerahWisataTable:
-            self.createNewWidget(e[0],e[1])
+        for e in self.transportTable:
+            self.createNewWidget(e[1],e[2],e[3],str(e[4]))
 
-    def createNewWidget(self,namaDaerahWisata,informasiDaerahWisata):
-        newDaerahWisata="daerahWisataFrame"+str(len(self.daerahWisataTable))
-        newVertical="verticalName"+str(len(self.daerahWisataTable))
-        newNamaDaerahWisata=namaDaerahWisata
-        newInformasiDaerahWisata=informasiDaerahWisata
+    def createNewWidget(self,namaTransport,LokasiBerangkat,LokasiTujuan,Harga):
+        newTransport="transportFrame"+str(len(self.transportTable))
+        newVertical="verticalName"+str(len(self.transportTable))
+        newNamaTransport=namaTransport
+        newLokasiBerangkat=LokasiBerangkat
+        newLokasiTujuan=LokasiTujuan
+        newHarga=Harga
 
-        self.daerahWisataFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        self.transportFrame=QtWidgets.QFrame(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.daerahWisataFrame.sizePolicy().hasHeightForWidth())
-        self.daerahWisataFrame.setSizePolicy(sizePolicy)
-        self.daerahWisataFrame.setMinimumSize(QtCore.QSize(800, 150))
-        self.daerahWisataFrame.setMaximumSize(QtCore.QSize(800, 150))
-        self.daerahWisataFrame.setStyleSheet("#"+newDaerahWisata+"{\n"
+        sizePolicy.setHeightForWidth(self.transportFrame.sizePolicy().hasHeightForWidth())
+        self.transportFrame.setSizePolicy(sizePolicy)
+        self.transportFrame.setMinimumSize(QtCore.QSize(800, 150))
+        self.transportFrame.setMaximumSize(QtCore.QSize(800, 150))
+        self.transportFrame.setStyleSheet("#" + newTransport + "{\n"
 "background-color: white;\n"
 "border: 1px solid black;\n"
 "}")
-        self.daerahWisataFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.daerahWisataFrame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.daerahWisataFrame.setObjectName(newDaerahWisata)
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.daerahWisataFrame)
-        self.verticalLayout.setObjectName(newVertical)
-        self.namaDaerahWisataLabel = QtWidgets.QLabel(self.daerahWisataFrame)
+        self.transportFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.transportFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.transportFrame.setObjectName(newTransport)
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.transportFrame)
+        self.verticalLayout_4.setObjectName(newVertical)
+        self.namaTransportLabel=QtWidgets.QLabel(self.transportFrame)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         font.setWeight(75)
 
-        self.namaDaerahWisataLabel.setFont(font)
-        self.namaDaerahWisataLabel.setObjectName(newNamaDaerahWisata)
-        self.namaDaerahWisataLabel.setText(newNamaDaerahWisata)
-        self.verticalLayout.addWidget(self.namaDaerahWisataLabel)
+        self.namaTransportLabel.setFont(font)
+        self.namaTransportLabel.setObjectName(newNamaTransport)
+        self.namaTransportLabel.setText(newNamaTransport)
+        self.verticalLayout_4.addWidget(self.namaTransportLabel)
 
-        self.informasiDaerahWisataLabel = QtWidgets.QLabel(self.daerahWisataFrame)
+        self.lokasiBerangkatLabel=QtWidgets.QLabel(self.transportFrame)
         font = QtGui.QFont()
         font.setPointSize(9)
-        self.informasiDaerahWisataLabel.setFont(font)
-        self.informasiDaerahWisataLabel.setObjectName(newInformasiDaerahWisata)
-        self.informasiDaerahWisataLabel.setText(newInformasiDaerahWisata)
-        self.verticalLayout.addWidget(self.informasiDaerahWisataLabel)
+        self.lokasiBerangkatLabel.setFont(font)
+        self.lokasiBerangkatLabel.setObjectName(newLokasiBerangkat)
+        self.lokasiBerangkatLabel.setText(newLokasiBerangkat)
+        self.verticalLayout_4.addWidget(self.lokasiBerangkatLabel)
 
-        self.verticalLayout_3.addWidget(self.daerahWisataFrame,QtCore.Qt.AlignTop)
-        self.daerahWisataFrame=QtWidgets.QFrame(self.scrollAreaWidgetContents)
-        self.daerahWisataFrame.setMinimumSize(QtCore.QSize(745, 0))
-        self.daerahWisataFrame.setMaximumSize(QtCore.QSize(745, 50))
-        self.daerahWisataFrame.setStyleSheet("background-color: white;")
-        self.daerahWisataFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.daerahWisataFrame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.daerahWisataFrame.setObjectName(newDaerahWisata)
-        self.verticalLayout_3.addWidget(self.daerahWisataFrame)
+        self.lokasiTujuanLabel=QtWidgets.QLabel(self.transportFrame)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.lokasiTujuanLabel.setFont(font)
+        self.lokasiTujuanLabel.setObjectName(newLokasiTujuan)
+        self.lokasiTujuanLabel.setText(newLokasiTujuan)
+        self.verticalLayout_4.addWidget(self.lokasiTujuanLabel)
+
+        self.hargaLabel=QtWidgets.QLabel(self.transportFrame)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.hargaLabel.setFont(font)
+        self.hargaLabel.setObjectName(newHarga)
+        self.hargaLabel.setText(newHarga)
+        self.verticalLayout_4.addWidget(self.hargaLabel)
+
+        self.verticalLayout_3.addWidget(self.transportFrame, 0, QtCore.Qt.AlignTop)
+        self.transportFrame=QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        self.transportFrame.setMinimumSize(QtCore.QSize(745, 0))
+        self.transportFrame.setMaximumSize(QtCore.QSize(745, 50))
+        self.transportFrame.setStyleSheet("background-color: white;")
+        self.transportFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.transportFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.transportFrame.setObjectName(newTransport)
+        self.verticalLayout_3.addWidget(self.transportFrame)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.addStretch()
-        
-
-        setattr(self,newDaerahWisata,self.daerahWisataFrame)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "X"))
-        self.label.setText(_translate("MainWindow", "Daerah Wisata"))
+        self.label.setText(_translate("MainWindow", "Transportasi"))
         self.pushButton_2.setText(_translate("MainWindow", "Search!"))
-        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Cari Daerah Wisata"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Cari Transportasi"))
 
     def searchButtonClicked(self):
         searchText=self.lineEdit.text()
@@ -166,20 +182,20 @@ class Ui_DaerahWisata(object):
                     # widget will be None if the item is a layout
                     widget.deleteLater()
         if searchText!="":
-            searchedObjekWisata=Database.Database.search("Daerah",NamaDaerah=searchText)
+            searchedObjekWisata=Database.Database.search("Transportasi",NamaTransportasi=searchText)
             for el in searchedObjekWisata:
-                self.createNewWidget(el[0],el[1])
+                self.createNewWidget(el[1],el[2],el[3],str(el[4]))
                 self.retranslateUi(MainWindow)
         else:
-            for e in self.daerahWisataTable:
-                self.createNewWidget(e[0],e[1])
+            for el in self.transportTable:
+                self.createNewWidget(el[1],el[2],el[3],str(el[4]))
                 self.retranslateUi(MainWindow)
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_DaerahWisata()
+    ui = Ui_Transportasi()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
