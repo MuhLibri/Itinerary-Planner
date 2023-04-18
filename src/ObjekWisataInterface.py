@@ -47,6 +47,29 @@ class Ui_ObjekWisata(object):
 "font: 16pt;\n"
 "color: white;\n"
 "}")
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        self.pushButton_2 = QtWidgets.QPushButton(self.frame)
+        self.pushButton_2.setGeometry(QtCore.QRect(710, 47, 93, 41))
+        self.pushButton_2.setStyleSheet("QPushButton{\n"
+"color: white;\n"
+"    background-color: rgb(42, 174, 255);\n"
+"    border: none;\n"
+"font: 10pt;\n"
+"}\n"
+"QPushButton:hover{\n"
+"background-color: rgb(35, 148, 213);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"background-color: rgb(25, 105, 152);\n"
+"}")
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.lineEdit = QtWidgets.QLineEdit(self.frame)
+        self.lineEdit.setGeometry(QtCore.QRect(70, 50, 641, 31))
+        self.lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.lineEdit.setText("")
+        self.lineEdit.setClearButtonEnabled(True)
+        self.lineEdit.setObjectName("lineEdit")
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         self.label.setScaledContents(False)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
@@ -63,6 +86,7 @@ class Ui_ObjekWisata(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         ObjekWisata.setCentralWidget(self.centralwidget)
+        self.pushButton_2.clicked.connect(self.deleteButtonClicked)
 
         
         # self.createNewWidget(self.objekWisataTable[1][0],self.objekWisataTable[1][1],self.objekWisataTable[1][2])
@@ -146,6 +170,24 @@ class Ui_ObjekWisata(object):
         ObjekWisata.setWindowTitle(_translate("ObjekWisata", "MainWindow"))
         self.pushButton.setText(_translate("ObjekWisata", "X"))
         self.label.setText(_translate("ObjekWisata", "Objek Wisata"))
+        self.pushButton_2.setText(_translate("ObjekWisata", "Search!"))
+        self.lineEdit.setPlaceholderText(_translate("ObjekWisata", "Cari Objek Wisata"))
+    
+    def deleteButtonClicked(self):
+        searchText=self.lineEdit.text()
+        if searchText!="":
+            for cnt in reversed(range(self.verticalLayout_3.count())):
+            # takeAt does both the jobs of itemAt and removeWidget
+            # namely it removes an item and returns it
+                widget = self.verticalLayout_3.takeAt(cnt).widget()
+
+                if widget is not None: 
+                    # widget will be None if the item is a layout
+                    widget.deleteLater()
+            searchedObjekWisata=Database.Database.search("ObjekWisata",NamaObjekWisata=searchText)
+            for el in searchedObjekWisata:
+                self.createNewWidget(el[0],el[1],el[2])
+                self.retranslateUi(ObjekWisata)
 
 
 if __name__ == "__main__":
