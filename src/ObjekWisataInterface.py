@@ -86,7 +86,7 @@ class Ui_ObjekWisata(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         ObjekWisata.setCentralWidget(self.centralwidget)
-        self.pushButton_2.clicked.connect(self.deleteButtonClicked)
+        self.pushButton_2.clicked.connect(self.searchButtonClicked)
 
         
         # self.createNewWidget(self.objekWisataTable[1][0],self.objekWisataTable[1][1],self.objekWisataTable[1][2])
@@ -173,7 +173,7 @@ class Ui_ObjekWisata(object):
         self.pushButton_2.setText(_translate("ObjekWisata", "Search!"))
         self.lineEdit.setPlaceholderText(_translate("ObjekWisata", "Cari Objek Wisata"))
     
-    def deleteButtonClicked(self):
+    def searchButtonClicked(self):
         searchText=self.lineEdit.text()
         for cnt in reversed(range(self.verticalLayout_3.count())):
             # takeAt does both the jobs of itemAt and removeWidget
