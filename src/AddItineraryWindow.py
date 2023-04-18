@@ -10,6 +10,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import ItineraryController
+import Itinerary
+import Database
+import sqlite3
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -161,6 +164,8 @@ class Ui_Dialog(object):
         self.submitButton.raise_()
         self.frame_2.raise_()
         self.frame.raise_()
+        self.firstTime=True;
+        self.idItinerary=0;
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -178,6 +183,8 @@ class Ui_Dialog(object):
         self.tanggalSelesaiLabel.setText(_translate("Dialog", "Tanggal Selesai:"))
 
     def submitButtonClicked(self):
+        idItinerary = self.idItinerary
+        firstTime = self.firstTime
         daerahWisata = self.addDaerahWisata.text()
         objekWisata = self.addObjekWisata.text()
         tanggalKunjungan = self.tanggalKunjunganDate.text()
@@ -185,19 +192,46 @@ class Ui_Dialog(object):
         transportasi = self.addTransportasi.text()
         
         if daerahWisata == "" or objekWisata == "" or tanggalKunjungan == "" or tanggalSelesai == "" or transportasi == "":
-            self.errorDialog = QtWidgets.QErrorMessage()
-            self.errorDialog.setWindowTitle("Error")
-            self.errorDialog.showMessage("Mohon isi semua data")
+            self.showErrorWindow("Data tidak boleh kosong")
         else:
-            print("added")
-            self.itineraryController=ItineraryController.ItineraryController()
-            self.itineraryController.addItinerary(daerahWisata, objekWisata, tanggalKunjungan, tanggalSelesai, transportasi)
-            self.itineraryController.insertItinerary()
-            self.addDaerahWisata.setText("")
-            self.addObjekWisata.setText("")
-            self.addTransportasi.setText("")
-        #     ItineraryController.ItineraryController.addItinerary(str(0),daerahWisata, objekWisata, tanggalKunjungan, tanggalSelesai, transportasi)
+            try:
+                print("added")
+                self.itineraryController=ItineraryController.ItineraryController
+                idItinerary = self.itineraryController.createNewItinerary(firstTime, Itinerary.Itinerary(idItinerary, tanggalKunjungan, tanggalSelesai, objekWisata,transportasi))
+                print(idItinerary)
+                #     ItineraryController.ItineraryController.insertItinerary(Itinerary.Itinerary(idItinerary, tanggalKunjungan, tanggalSelesai,objekWisata, transportasi))
+                self.addDaerahWisata.setText("")
+                self.addObjekWisata.setText("")
+                self.addTransportasi.setText("")
+                self.idItinerary=idItinerary
+                self.firstTime = False
+            except sqlite3.Error as error:
+                self.showErrorWindow(error.args[0])
 
+#     def submitButtonClicked(self):
+#         daerahWisata = self.addDaerahWisata.text()
+#         objekWisata = self.addObjekWisata.text()
+#         tanggalKunjungan = self.tanggalKunjunganDate.text()
+#         tanggalSelesai = self.tanggalSelesaiDate.text()
+#         transportasi = self.addTransportasi.text()
+        
+#         if daerahWisata == "" or objekWisata == "" or tanggalKunjungan == "" or tanggalSelesai == "" or transportasi == "":
+#             self.errorDialog = QtWidgets.QErrorMessage()
+#             self.errorDialog.setWindowTitle("Error")
+#             self.errorDialog.showMessage("Mohon isi semua data")
+#         else:
+#             print("added")
+#             self.itineraryController=ItineraryController.ItineraryController()
+#             self.itineraryController.addItinerary(daerahWisata, objekWisata, tanggalKunjungan, tanggalSelesai, transportasi)
+#             self.itineraryController.insertItinerary()
+#             self.addDaerahWisata.setText("")
+#             self.addObjekWisata.setText("")
+#             self.addTransportasi.setText("")
+        #     ItineraryController.ItineraryController.addItinerary(str(0),daerahWisata, objekWisata, tanggalKunjungan, tanggalSelesai, transportasi)
+    def showErrorWindow(self,errorMessage):
+        self.errorDialog = QtWidgets.QErrorMessage()
+        self.errorDialog.setWindowTitle("Error")
+        self.errorDialog.showMessage(errorMessage)
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
