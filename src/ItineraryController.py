@@ -1,35 +1,37 @@
 from Database import *
-from Itinerary import *
-from datetime import date
+from LembarItinerary import *
+import datetime
 
 
 class ItineraryController:
-    def __init__(self):
-        # Lembar itinerary berupa list dari itinerary
-        self._lembarItinerary : list[Itinerary] = []
-    
-    # Membuat lembar itinerary baru. Menambah IdItinerary baru dan tanggal buat ke tabel RIwayat
     @staticmethod
-    def createItinerary():
+    # Membuat lembar itinerary baru. Menambahkan IdItinerary baru dan tanggal buat ke tabel Riwayat
+    def createLembarItinerary():
         num = Database.count("Riwayat") + 1
         idItinerary = ((6 - len(str(num))) * '0') + str(num)
-        Database.insert("Riwayat", IdItinerary=idItinerary, TanggalBuat=date.today(), Catatan='')
+        Database.insert("Riwayat", IdItinerary=idItinerary, TanggalBuat=datetime.datetime.today(), Catatan='')
+        return idItinerary
 
-    # Mengembalikan lembar itinerary yang ada pada tabel Itinerary sesuai dengan IdItinerary
     @staticmethod
+    # Mengembalikan lembar itinerary yang ada pada tabel Itinerary sesuai dengan IdItinerary
     def searchLembarItinerary(idItinerary):
         searchResult = Database.search('Itinerary', IdItinerary=idItinerary)
-        return [Itinerary(x[0], x[1], x[2], x[3], x[4]) for x in searchResult]
+        lembarItinerary = LembarItinerary()
+        lembarItinerary.lembarItinerary = [Itinerary(x[0], x[1], x[2], x[3], x[4]) for x in searchResult]
+        return lembarItinerary
 
-    # Menambahkan Itinerary ke lembarItinerary. Itinerary yang disimpan pada lembarItinerary belum diinsert ke tabel Itinerary
-    def addItinerary(self, idItinerary, waktuAwal, waktuAkhir, namaObjekWisata, idTransportasi):
-        self._lembarItinerary.append(Itinerary(idItinerary, waktuAwal, waktuAkhir, namaObjekWisata, idTransportasi))
-
-    # Mengembalikan lembarItinerary
-    def getLembarItinerary(self):
-        return self._lembarItinerary
-
-    # Memasukkan lemarItinerary ke tabel Itinerary
-    def insertItinerary(self):
-        for itinerary in self._lembarItinerary:
+    @staticmethod
+    # Memasukkan lembarItinerary ke tabel Itinerary
+    def insertLembarItinerary(lembarItinerary: LembarItinerary):
+        for itinerary in lembarItinerary.lembarItinerary:
             Database.insert('Itinerary', IdItinerary=itinerary.idItinerary, WaktuAwal=itinerary.waktuAwal, WaktuAkhir=itinerary.waktuAkhir, NamaObjekWisata=itinerary.namaObjekWisata, IdTransportasi=itinerary.idTransportasi)
+
+    @staticmethod
+    # Mengupdate satu tuple pada tabel Itinerary dengan updateValue yang sesuai dengan targetItinerary
+    def updateItinerary(targetItinerary: Itinerary, updateValue: Itinerary):
+        Database.update("Itinerary", {'IdItinerary':targetItinerary.idItinerary, 'WaktuAwal':targetItinerary.waktuAwal}, IdItinerary=updateValue.idItinerary, WaktuAwal=updateValue.waktuAwal, WaktuAkhir=updateValue.waktuAkhir, NamaObjekWisata=updateValue.namaObjekWisata, IdTransportasi=updateValue.idTransportasi)
+
+    @staticmethod
+    # Menghapus satu tuple pada tabel Itinerary yang sesuai dengan targetItinerary
+    def deleteItinerary(targetItinerary: Itinerary):
+        Database.delete("Itinerary", IdItinerary=targetItinerary.idItinerary, WaktuAwal=targetItinerary.waktuAwal)

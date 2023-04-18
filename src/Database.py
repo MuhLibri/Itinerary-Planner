@@ -27,7 +27,7 @@ class Database:
         example: update('Riwayat', {'IdItinerary':'000001'}, IdItinerary='000002', Catatan='hai')
         """
         with connect:
-            condition = ', '.join([a + '=' + "'{}'".format(b) for a,b in dict.items()])
+            condition = ' AND '.join([a + '=' + "'{}'".format(b) for a,b in dict.items()])
             modifiedAttribute = ','.join([s+'=:'+s for s in attr.keys()])
             cursor.execute("UPDATE {} SET {} WHERE {}".format(table, modifiedAttribute, condition), attr) 
 
@@ -39,7 +39,7 @@ class Database:
         example: delete('Riwayat', IdItinerary='000001')
         """        
         with connect:
-            attrs = ','.join([s+'=:'+s for s in attr.keys()])
+            attrs = ' AND '.join([s+'=:'+s for s in attr.keys()])
             cursor.execute("DELETE FROM {} WHERE {}".format(table, attrs), attr)
 
 
