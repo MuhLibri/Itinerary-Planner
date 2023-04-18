@@ -49,4 +49,4 @@ class ItineraryController:
             itinerary.idItinerary = idItinerary
         
         ItineraryController.insertItinerary(itinerary)
-        return idItinerary
+        return itinerary.idItinerary
