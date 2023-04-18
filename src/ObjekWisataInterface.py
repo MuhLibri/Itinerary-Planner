@@ -175,8 +175,7 @@ class Ui_ObjekWisata(object):
     
     def deleteButtonClicked(self):
         searchText=self.lineEdit.text()
-        if searchText!="":
-            for cnt in reversed(range(self.verticalLayout_3.count())):
+        for cnt in reversed(range(self.verticalLayout_3.count())):
             # takeAt does both the jobs of itemAt and removeWidget
             # namely it removes an item and returns it
                 widget = self.verticalLayout_3.takeAt(cnt).widget()
@@ -184,11 +183,15 @@ class Ui_ObjekWisata(object):
                 if widget is not None: 
                     # widget will be None if the item is a layout
                     widget.deleteLater()
+        if searchText!="":
             searchedObjekWisata=Database.Database.search("ObjekWisata",NamaObjekWisata=searchText)
             for el in searchedObjekWisata:
                 self.createNewWidget(el[0],el[1],el[2])
                 self.retranslateUi(ObjekWisata)
-
+        else:
+            for e in self.objekWisataTable:
+                self.createNewWidget(e[0],e[1],e[2])
+                self.retranslateUi(ObjekWisata)
 
 if __name__ == "__main__":
     import sys
