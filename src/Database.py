@@ -51,7 +51,7 @@ class Database:
         """
         with connect:
             if (bool(attr)):
-                attrs = ','.join([s+'=:'+s for s in attr.keys()])
+                attrs = ' AND '.join([s+'=:'+s for s in attr.keys()])
                 cursor.execute("SELECT * FROM {} WHERE {}".format(table, attrs), attr)
             else:
                 cursor.execute("SELECT * FROM {}".format(table))
