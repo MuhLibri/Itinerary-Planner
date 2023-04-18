@@ -44,7 +44,7 @@ class Database:
 
 
     @staticmethod
-    def search(table: str, ignore_case: bool = False, starts_with: bool = False, **attr):
+    def search(table: str, ignore_case: bool = False, starts_with: bool = False, contains: bool = False, **attr):
         """
         table is the target table on database, **attr are the conditions of the tuple in the table to be returned (can be empty)
         example: search('Riwayat', IdItinerary='000001')        
@@ -52,8 +52,8 @@ class Database:
         with connect:
             ignore_case_q = ""
             if (bool(attr)):
-                if starts_with:
-                    attrs = ' AND '.join([s+' LIKE "'+attr[s]+'%"' for s in attr.keys()])
+                if starts_with or contains:
+                    attrs = ' AND '.join([s+' LIKE "'+'%'*contains+attr[s]+'%"' for s in attr.keys()])
                     print(attrs)
                 else:
                     ignore_case_q = ignore_case*" COLLATE NOCASE"
