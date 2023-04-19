@@ -5,17 +5,18 @@
 # Daftar Tabel
 1. Tabel Daerah
 
-| Atribut              |Tipe      | Atribut |Tipe    |
-| ------               | ------   | ------  | ------ |
-|NamaDaerah            |TEXT      |Tidak    |        |
-|InformasiDaerah       |TEXT      |Boleh    |        |
+|Atribut               |Tipe      |Boleh Null |
+| ------               | ------   | ------    |
+|NamaDaerah            |TEXT      |Tidak      |
+|InformasiDaerah       |TEXT      |Boleh      |
 
 2. Tabel ObjekWisata
-| Atribut              |Tipe      | Atribut |Tipe    |
-| ------               | ------   | ------  | ------ |
-|NamaObjekWisata       |TEXT      |Tidak    |        |
-|NamaDaerah            |TEXT      |Tidak    |        |
-|InformasiObjekWisata  |TEXT      |Boleh    |        |
+
+|Atribut               |Tipe      |Boleh Null   |
+| ------               | ------   | ------      |
+|NamaObjekWisata       |TEXT      |Tidak        |
+|NamaDaerah            |TEXT      |Tidak        |
+|InformasiObjekWisata  |TEXT      |Boleh        |
 
 3. Tabel Transposi
 | Atribut              |Tipe      | Atribut |Tipe    |
