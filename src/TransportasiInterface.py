@@ -93,7 +93,7 @@ class Ui_Transportasi(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.pushButton_2.clicked.connect(self.searchButtonClicked)
+        self.pushButton_2.clicked.connect(lambda: self.searchButtonClicked(MainWindow))
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -182,7 +182,7 @@ class Ui_Transportasi(object):
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "Cari Lokasi Berangkat"))
         self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "Cari Lokasi Tujuan"))
 
-    def searchButtonClicked(self):
+    def searchButtonClicked(self, MainWindow):
         searchTextBerangkat=self.lineEdit.text()
         searchTextTujuan=self.lineEdit_2.text()
         for cnt in reversed(range(self.verticalLayout_3.count())):
