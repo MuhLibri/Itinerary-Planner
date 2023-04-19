@@ -19,7 +19,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(640, 480)
         Dialog.setStyleSheet("background-color: rgb(255, 255, 255);")
-        Dialog.setSizeGripEnabled(False)
+        #Dialog.setSizeGripEnabled(False)
         self.frame = QtWidgets.QFrame(Dialog)
         self.frame.setGeometry(QtCore.QRect(0, 0, 640, 80))
         self.frame.setStyleSheet("background-color: rgb(42, 174, 255);")

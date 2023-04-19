@@ -9,12 +9,23 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from AddItineraryWindow import Ui_AddItineraryWindow
+from AddItineraryWindow import Ui_Dialog
+from ui_RiwayatInterface import Ui_Riwayat
 
 
-class Ui_MainWindow(object):
-    def switchWin(self, MainWindow):
-            widget.setCurrentIndex(widget.currentIndex() + 1)
+class Ui_StartWindow(object):
+
+    def openNewItinerary(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Dialog()
+        self.ui.setupUi(self.window)
+        self.window.show()
+    
+    def openRiwayat(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Riwayat()
+        self.ui.setupUi(self.window)
+        self.window.show()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -108,7 +119,7 @@ class Ui_MainWindow(object):
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.openNewItinerary())
         self.pushButton.setGeometry(QtCore.QRect(190, 440, 151, 61))
         font = QtGui.QFont()
         font.setFamily("Javanese Text")
@@ -122,7 +133,8 @@ class Ui_MainWindow(object):
 "\n"
 "padding-top:5px;")
         self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.openRiwayat())
         self.pushButton_2.setGeometry(QtCore.QRect(480, 440, 151, 61))
         font = QtGui.QFont()
         font.setFamily("Javanese Text")
@@ -149,7 +161,6 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.pushButton.clicked.connect(self.switchWin)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -173,14 +184,8 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    window2 = QtWidgets.QMainWindow()
-    widget = QtWidgets.QStackedWidget()
-    ui = Ui_MainWindow()
-    ui2 = Ui_AddItineraryWindow()
-    ui.setupUi(MainWindow)
-    ui2.setupUi(window2)
-    widget.addWidget(MainWindow)
-    widget.addWidget(window2)
-    MainWindow.show()
+    start = QtWidgets.QMainWindow()
+    ui = Ui_StartWindow()
+    ui.setupUi(start)
+    start.show()
     sys.exit(app.exec_())

@@ -9,10 +9,25 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from UbahItineraryDialogue import Ui_UbahWindow
+from TambahCatatanDialogue import Ui_CatatanWindow
 
 
 class Ui_Riwayat(object):
     riwayatCount = 0
+
+    def openUbah(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_UbahWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openCatatan(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_CatatanWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def setupUi(self, Riwayat):
         Riwayat.setObjectName("Riwayat")
         Riwayat.resize(800, 578)
@@ -138,26 +153,38 @@ class Ui_Riwayat(object):
         self.verticalLayout_4.addWidget(self.DestinationLabel)
 
         #Setup ubah
-        self.UbahLabel = QtWidgets.QLabel(self.riwayatFrame)
+        self.ubahButton = QtWidgets.QPushButton(self.riwayatFrame, clicked = lambda: self.openUbah())
+        self.ubahButton.setObjectName(newUbah)
+        self.ubahButton.setGeometry(QtCore.QRect(280, 130, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setUnderline(True)
-        self.UbahLabel.setFont(font)
-        self.UbahLabel.setStyleSheet("color:rgb(12, 190, 255)")
-        self.UbahLabel.setObjectName(newUbah)
-        self.UbahLabel.setText("Ubah")
-        self.verticalLayout_4.addWidget(self.UbahLabel)
+        self.ubahButton.setFont(font)
+        self.ubahButton.setText("Ubah")
+        self.ubahButton.setStyleSheet("border: none; color:rgb(12, 190, 255);")
+        self.verticalLayout_4.addWidget(self.ubahButton, 0, QtCore.Qt.AlignLeft)
 
         #Setup catatan
-        self.CatatanLabel = QtWidgets.QLabel(self.riwayatFrame)
+        # self.CatatanLabel = QtWidgets.QLabel(self.riwayatFrame)
+        # font = QtGui.QFont()
+        # font.setPointSize(9)
+        # font.setUnderline(True)
+        # self.CatatanLabel.setFont(font)
+        # self.CatatanLabel.setStyleSheet("color:rgb(12, 190, 255)")
+        # self.CatatanLabel.setObjectName(newCatatan)
+        # self.CatatanLabel.setText("Catatan")
+        # self.verticalLayout_4.addWidget(self.CatatanLabel)
+
+        self.catatanButton = QtWidgets.QPushButton(self.riwayatFrame, clicked = lambda: self.openCatatan())
+        self.catatanButton.setObjectName(newCatatan)
+        self.catatanButton.setGeometry(QtCore.QRect(280, 130, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setUnderline(True)
-        self.CatatanLabel.setFont(font)
-        self.CatatanLabel.setStyleSheet("color:rgb(12, 190, 255)")
-        self.CatatanLabel.setObjectName(newCatatan)
-        self.CatatanLabel.setText("Catatan")
-        self.verticalLayout_4.addWidget(self.CatatanLabel)
+        self.catatanButton.setFont(font)
+        self.catatanButton.setText("Catatan")
+        self.catatanButton.setStyleSheet("border: none; color:rgb(12, 190, 255);")
+        self.verticalLayout_4.addWidget(self.catatanButton, 0, QtCore.Qt.AlignLeft)
 
         self.verticalLayout_3.addWidget(self.riwayatFrame, QtCore.Qt.AlignTop)
         self.riwayatFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
