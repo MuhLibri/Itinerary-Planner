@@ -62,7 +62,7 @@ class Ui_DaerahWisata(object):
         self.label.setScaledContents(False)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.pushButton_2 = QtWidgets.QPushButton(self.frame)
+        self.pushButton_2 = QtWidgets.QPushButton(self.frame, clicked = lambda: self.searchButtonClicked(MainWindow))
         self.pushButton_2.setGeometry(QtCore.QRect(710, 47, 93, 41))
         self.pushButton_2.setStyleSheet("QPushButton{\n"
 "color: white;\n"
@@ -84,7 +84,7 @@ class Ui_DaerahWisata(object):
         self.lineEdit.setClearButtonEnabled(True)
         self.lineEdit.setObjectName("lineEdit")
         MainWindow.setCentralWidget(self.centralwidget)
-        self.pushButton_2.clicked.connect(self.searchButtonClicked)
+        #self.pushButton_2.clicked.connect(self.searchButtonClicked)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -170,7 +170,7 @@ class Ui_DaerahWisata(object):
         self.pushButton_2.setText(_translate("MainWindow", "Search!"))
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "Cari Daerah Wisata"))
 
-    def searchButtonClicked(self):
+    def searchButtonClicked(self, MainWindow):
         searchText=self.lineEdit.text()
         for cnt in reversed(range(self.verticalLayout_3.count())):
             # takeAt does both the jobs of itemAt and removeWidget

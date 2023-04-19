@@ -39,6 +39,7 @@ class Ui_StartWindow(object):
                 self.searchUi = Ui_ObjekWisata()
         self.searchUi.setupUi(self.searchWindow)
         self.searchUi.lineEdit.setText(self.SearchBar.text())
+        self.searchUi.searchButtonClicked(self.searchWindow)
         self.searchWindow.show()
 
     def setupUi(self, MainWindow):
