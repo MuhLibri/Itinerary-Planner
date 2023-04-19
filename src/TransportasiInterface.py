@@ -193,6 +193,8 @@ class Ui_Transportasi(object):
                     widget.deleteLater()
         if searchTextBerangkat!="" and searchTextTujuan!="":
             searchedTransportasi=Database.Database.search("Transportasi",True,True,True,LokasiBerangkat=searchTextBerangkat, LokasiTujuan=searchTextTujuan)
+            rataan=hitungRataan(searchedTransportasi)
+            self.createNewWidget("Rataan","Lokasi Berangkat: "+searchTextBerangkat,"Lokasi Berangkat: "+searchTextTujuan,str(rataan))
             for el in searchedTransportasi:
                 self.createNewWidget(el[1],el[2],el[3],str(el[4]))
                 self.retranslateUi(MainWindow)
@@ -219,6 +221,12 @@ class Ui_Transportasi(object):
         #     for el in self.transportTable:
         #         self.createNewWidget(el[1],el[2],el[3],str(el[4]))
         #         self.retranslateUi(MainWindow)
+
+def hitungRataan(searchedTransport):
+        totalHarga=0
+        for el in searchedTransport:
+                totalHarga+=el[4]
+        return totalHarga/len(searchedTransport)
 
 if __name__ == "__main__":
     import sys
