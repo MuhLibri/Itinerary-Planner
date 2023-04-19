@@ -14,7 +14,7 @@ import Database
 class Ui_DaerahWisataDialog(object):
     table=[]
     def setupUi(self, Dialog, namaDaerah):
-        self.table=Database.Database.search("ObjekWisata",True,True,True,NamaDaerah=str(namaDaerah))
+        self.table=Database.Database.search("ObjekWisata",starts_with=True,NamaDaerah=str(namaDaerah))
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 578)
         self.scrollArea = QtWidgets.QScrollArea(Dialog)
