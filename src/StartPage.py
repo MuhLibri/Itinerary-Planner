@@ -9,10 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from AddItineraryWindow import Ui_AddItineraryWindow
 
 
-class Ui_MainWindow(object):
+class Ui_StartWindow(object):
     def switchWin(self, MainWindow):
             widget.setCurrentIndex(widget.currentIndex() + 1)
 
@@ -176,7 +175,7 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     window2 = QtWidgets.QMainWindow()
     widget = QtWidgets.QStackedWidget()
-    ui = Ui_MainWindow()
+    ui = Ui_StartWindow()
     ui2 = Ui_AddItineraryWindow()
     ui.setupUi(MainWindow)
     ui2.setupUi(window2)
