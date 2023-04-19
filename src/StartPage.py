@@ -13,6 +13,7 @@ from AddItineraryWindow import Ui_Dialog
 from ui_RiwayatInterface import Ui_Riwayat
 from DaerahWisataInterface import Ui_DaerahWisata
 from ObjekWisataInterface import Ui_ObjekWisata
+from TransportasiInterface import Ui_Transportasi
 
 
 class Ui_StartWindow(object):
@@ -41,6 +42,24 @@ class Ui_StartWindow(object):
         self.searchUi.lineEdit.setText(self.SearchBar.text())
         self.searchUi.searchButtonClicked(self.searchWindow)
         self.searchWindow.show()
+
+    def openObjekWisata(self):
+        self.objekWindow = QtWidgets.QMainWindow()
+        self.objekUi = Ui_ObjekWisata()
+        self.objekUi.setupUi(self.objekWindow)
+        self.objekWindow.show()
+
+    def openDaerahWisata(self):
+        self.daerahWindow = QtWidgets.QMainWindow()
+        self.daerahUi = Ui_DaerahWisata()
+        self.daerahUi.setupUi(self.daerahWindow)
+        self.daerahWindow.show()
+
+    def openTransportasi(self):
+        self.transportasiWindow = QtWidgets.QMainWindow()
+        self.transportasiUi = Ui_Transportasi()
+        self.transportasiUi.setupUi(self.transportasiWindow)
+        self.transportasiWindow.show()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -155,6 +174,53 @@ class Ui_StartWindow(object):
 "border-radius: 15px;\n"
 "padding-top:5px;")
         self.pushButton_2.setObjectName("pushButton_2")
+
+        self.ObjekWisataButton = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.openObjekWisata())
+        self.ObjekWisataButton.setGeometry(QtCore.QRect(80, 550, 151, 61))
+        font = QtGui.QFont()
+        font.setFamily("Javanese Text")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.ObjekWisataButton.setFont(font)
+        self.ObjekWisataButton.setStyleSheet("background-color: white;\n"
+"\n"
+"border-radius: 15px;\n"
+"\n"
+"padding-top:5px;")
+        self.ObjekWisataButton.setObjectName("ObjekWisataButton")
+        self.DaerahWisataButton = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.openDaerahWisata())
+        self.DaerahWisataButton.setGeometry(QtCore.QRect(330, 550, 151, 61))
+        font = QtGui.QFont()
+        font.setFamily("Javanese Text")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.DaerahWisataButton.setFont(font)
+        self.DaerahWisataButton.setStyleSheet("background-color: white;\n"
+"\n"
+"border-radius: 15px;\n"
+"\n"
+"padding-top:5px;")
+        self.DaerahWisataButton.setObjectName("DaerahWisataButton")
+        self.TransportasiButton = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.openTransportasi())
+        self.TransportasiButton.setGeometry(QtCore.QRect(610, 550, 151, 61))
+        font = QtGui.QFont()
+        font.setFamily("Javanese Text")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.TransportasiButton.setFont(font)
+        self.TransportasiButton.setStyleSheet("background-color: white;\n"
+"\n"
+"border-radius: 15px;\n"
+"\n"
+"padding-top:5px;")
+        self.TransportasiButton.setObjectName("TransportasiButton")
+
+        self.ObjekWisataButton.raise_()
+        self.DaerahWisataButton.raise_()
+        self.TransportasiButton.raise_()
         self.label.raise_()
         self.TitleLabel.raise_()
         self.ExtraLabel.raise_()
@@ -186,6 +252,9 @@ class Ui_StartWindow(object):
         self.comboBox.setItemText(1, _translate("MainWindow", "Daerah Wisata"))
         self.pushButton.setText(_translate("MainWindow", "Buat Baru"))
         self.pushButton_2.setText(_translate("MainWindow", "Riwayat"))
+        self.ObjekWisataButton.setText(_translate("MainWindow", "Objek Wisata"))
+        self.DaerahWisataButton.setText(_translate("MainWindow", "Daerah Wisata"))
+        self.TransportasiButton.setText(_translate("MainWindow", "Transportasi"))
 
 
 if __name__ == "__main__":

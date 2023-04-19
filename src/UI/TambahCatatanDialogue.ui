@@ -143,6 +143,12 @@ color: white;
 border-radius: 20px;
 border-color: rgb(42, 174, 255);</string>
          </property>
+         <property name="plainText">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>test</string>
+         </property>
         </widget>
         <widget class="QPushButton" name="pushButton_2">
          <property name="geometry">
