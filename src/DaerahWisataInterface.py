@@ -166,7 +166,7 @@ class Ui_DaerahWisata(object):
                     # widget will be None if the item is a layout
                     widget.deleteLater()
         if searchText!="":
-            searchedObjekWisata=Database.Database.search("Daerah",NamaDaerah=searchText)
+            searchedObjekWisata=Database.Database.search("Daerah",True,True,True,NamaDaerah=searchText)
             for el in searchedObjekWisata:
                 self.createNewWidget(el[0],el[1])
                 self.retranslateUi(MainWindow)
