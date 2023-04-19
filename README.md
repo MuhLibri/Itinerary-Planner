@@ -1,11 +1,14 @@
-# IF2250-2023-K01-14-ItineraryPlanner
+| header | header |
+| ------ | ------ |
+|        |        |
+|        |        |# IF2250-2023-K01-14-ItineraryPlanner
 
 
 
 # Daftar Tabel
 1. Tabel Daerah
 |Atribut               |Tipe      |Boleh NULL  |Deskripsi            |
-|   ---                |   ---    |    ---     |    ---              |
+|   ---------          |   ---------    |    ---------     |    ---------              |
 |NamaDaerah            |TEXT      |Tidak       |                     |
 |InformasiDaerah       |TEXT      |BOLEH       |                     |
 
