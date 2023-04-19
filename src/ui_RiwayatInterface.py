@@ -12,22 +12,23 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from UbahItineraryDialogue import Ui_UbahWindow
 from TambahCatatanDialogue import Ui_CatatanWindow
 from RiwayatController import *
+from ui_Edititinerary import Ui_Edit
 
 
 class Ui_Riwayat(object):
     riwayatCount = 0
     listRiwayat = RiwayatController.getListRiwayat()
     def openUbah(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_UbahWindow()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        self.ubahWindow = QtWidgets.QMainWindow()
+        self.ubahUi = Ui_Edit()
+        self.ubahUi.setupUi(self.ubahWindow)
+        self.ubahWindow.show()
 
     def openCatatan(self, riwayat):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_CatatanWindow()
-        self.ui.setupUi(self.window, riwayat)
-        self.window.show()
+        self.catatanWindow = QtWidgets.QMainWindow()
+        self.catatanUi = Ui_CatatanWindow()
+        self.catatanUi.setupUi(self.catatanWindow, riwayat)
+        self.catatanWindow.show()
 
     def setupUi(self, Riwayat):
         Riwayat.setObjectName("Riwayat")

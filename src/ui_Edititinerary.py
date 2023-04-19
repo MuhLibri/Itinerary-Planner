@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'template2akhir.ui'
+# Form implementation generated from reading ui file 'RiwayatInterface.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -9,87 +9,214 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from UbahItineraryDialogue import Ui_UbahWindow
+from TambahCatatanDialogue import Ui_CatatanWindow
+from RiwayatController import *
+from EditUbahItinerary import Ui_Dialog
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(480, 640)
-        self.widget = QtWidgets.QWidget(Form)
-        self.widget.setGeometry(QtCore.QRect(0, 0, 471, 631))
-        self.widget.setStyleSheet("background-color:rgb(255, 255, 255)")
-        self.widget.setObjectName("widget")
-        self.label = QtWidgets.QLabel(self.widget)
-        self.label.setGeometry(QtCore.QRect(6, 10, 461, 121))
-        self.label.setStyleSheet("\n"
-"font: 15pt \"MS Shell Dlg 2\";\n"
-"background-color: rgb(85, 170, 255);\n"
-"color: rgb(255, 255, 255);")
+class Ui_Edit(object):
+    riwayatCount = 0
+    listRiwayat = RiwayatController.getListRiwayat()
+    def openUbah(self):
+        self.ubahWindow = QtWidgets.QMainWindow()
+        self.ubahUi = Ui_Dialog()
+        self.ubahUi.setupUi(self.ubahWindow)
+        self.ubahWindow.show()
+
+    def openHapus(self, riwayat):
+        RiwayatController.deleteRiwayat(riwayat.lembarItinerary.lembarItinerary[0].idItinerary)
+        # self.catatanWindow = QtWidgets.QMainWindow()
+        # self.catatanUi = Ui_CatatanWindow()
+        # self.catatanUi.setupUi(self.catatanWindow, riwayat)
+        # self.catatanWindow.show()
+
+    def setupUi(self, Riwayat):
+        Riwayat.setObjectName("Riwayat")
+        Riwayat.resize(800, 578)
+        self.centralwidget = QtWidgets.QWidget(Riwayat)
+        self.centralwidget.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.centralwidget.setObjectName("centralwidget")
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame.setGeometry(QtCore.QRect(-1, 0, 801, 80))
+        self.frame.setStyleSheet("background-color: rgb(42, 174, 255);")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.pushButton = QtWidgets.QPushButton(self.frame)
+        self.pushButton.setGeometry(QtCore.QRect(10, 10, 60, 50))
+        self.pushButton.setStyleSheet("QPushButton{\n"
+"color: white;\n"
+"    background-color: rgb(42, 174, 255);\n"
+"    border: none;\n"
+"font: 16pt;\n"
+"}\n"
+"QPushButton:hover{\n"
+"background-color: rgb(35, 148, 213);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"background-color: rgb(25, 105, 152);\n"
+"}")
+        # self.pushButton.setFlat(True)
+        # self.pushButton.setObjectName("pushButton")
+        self.label = QtWidgets.QLabel(self.frame)
+        self.label.setGeometry(QtCore.QRect(220, 10, 371, 50))
+        self.label.setStyleSheet("QLabel{\n"
+"background-color: rgb(42, 174, 255);\n"
+"font: 16pt;\n"
+"color: white;\n"
+"}")
+        self.label.setScaledContents(False)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.textEdit = QtWidgets.QTextEdit(self.widget)
-        self.textEdit.setGeometry(QtCore.QRect(10, 140, 461, 101))
-        self.textEdit.setReadOnly(True)
-        self.textEdit.setObjectName("textEdit")
-        self.textEdit_2 = QtWidgets.QTextEdit(self.widget)
-        self.textEdit_2.setGeometry(QtCore.QRect(10, 250, 461, 101))
-        self.textEdit_2.setReadOnly(True)
-        self.textEdit_2.setObjectName("textEdit_2")
-        self.textEdit_3 = QtWidgets.QTextEdit(self.widget)
-        self.textEdit_3.setGeometry(QtCore.QRect(10, 360, 461, 101))
-        self.textEdit_3.setReadOnly(True)
-        self.textEdit_3.setObjectName("textEdit_3")
-        self.pushButton = QtWidgets.QPushButton(self.widget)
-        self.pushButton.setGeometry(QtCore.QRect(10, 20, 51, 31))
-        self.pushButton.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgb(85, 170, 255);\n"
-"font: 16pt \"MS Shell Dlg 2\";")
-        self.pushButton.setObjectName("pushButton")
+        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
+        self.scrollArea.setGeometry(QtCore.QRect(-1, 76, 801, 501))
+        self.scrollArea.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 799, 499))
+        self.scrollAreaWidgetContents.setAutoFillBackground(False)
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
+        self.verticalLayout_3.setContentsMargins(0, 3, 0, -1)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        # self.pushButton_2 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        # self.pushButton_2.setObjectName("pushButton_2")
+        # self.verticalLayout_3.addWidget(self.pushButton_2)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        Riwayat.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(Riwayat)
+        QtCore.QMetaObject.connectSlotsByName(Riwayat)
+    
+        for elmt in self.listRiwayat:
+            self.createNewWidget(elmt)
 
-    def retranslateUi(self, Form):
+        # self.pushButton_2.clicked.connect(self.createNewWidget)
+
+    def createNewWidget(self, riwayat):
+        newRiwayat = "riwayatFrame" + str(self.riwayatCount)
+        newVertical = "verticalName" + str(self.riwayatCount)
+        newTitle = "{} Hari di {}".format(RiwayatController.getDuration(riwayat), RiwayatController.getDaerahItinerary(riwayat))
+        newDuration = "{} - {}".format(RiwayatController.getStartDate(riwayat), RiwayatController.getEndDate(riwayat))
+        newDestination = "{}".format(', '.join([str(elem) for elem in RiwayatController.getListObjekWisata(riwayat)]))
+        newUbah = "ubah" + str(self.riwayatCount)
+        newHapus = "hapus" + str(self.riwayatCount)
+        self.riwayatCount += 1
+
+        self.riwayatFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.riwayatFrame.sizePolicy().hasHeightForWidth())
+        self.riwayatFrame.setSizePolicy(sizePolicy)
+        self.riwayatFrame.setMinimumSize(QtCore.QSize(800, 150))
+        self.riwayatFrame.setMaximumSize(QtCore.QSize(800, 150))
+        self.riwayatFrame.setStyleSheet("#" + newRiwayat + "{\n"
+"background-color: white;\n"
+"border: 1px solid black;\n"
+"}")
+        self.riwayatFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.riwayatFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.riwayatFrame.setObjectName(newRiwayat)
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.riwayatFrame)
+        self.verticalLayout_4.setObjectName(newVertical)
+        self.TitleLabel = QtWidgets.QLabel(self.riwayatFrame)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+
+        #Setup title
+        self.TitleLabel.setFont(font)
+        self.TitleLabel.setObjectName(newTitle)
+        self.TitleLabel.setText(newTitle)
+        self.verticalLayout_4.addWidget(self.TitleLabel)
+        
+
+        #Setup duration
+        self.DurationLabel = QtWidgets.QLabel(self.riwayatFrame)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.DurationLabel.setFont(font)
+        self.DurationLabel.setObjectName(newDuration)
+        self.DurationLabel.setText(newDuration)
+        self.verticalLayout_4.addWidget(self.DurationLabel)
+
+        #Setup destination
+        self.DestinationLabel = QtWidgets.QLabel(self.riwayatFrame)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.DestinationLabel.setFont(font)
+        self.DestinationLabel.setObjectName(newDestination)
+        self.DestinationLabel.setText(newDestination)
+        self.verticalLayout_4.addWidget(self.DestinationLabel)
+
+        #Setup ubah
+        self.ubahButton = QtWidgets.QPushButton(self.riwayatFrame, clicked = lambda: self.openUbah())
+        self.ubahButton.setObjectName(newUbah)
+        self.ubahButton.setGeometry(QtCore.QRect(280, 130, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setUnderline(True)
+        self.ubahButton.setFont(font)
+        self.ubahButton.setText("Ubah")
+        self.ubahButton.setStyleSheet("border: none; color:rgb(12, 190, 255);")
+        self.verticalLayout_4.addWidget(self.ubahButton, 0, QtCore.Qt.AlignLeft)
+
+        #Setup catatan
+        # self.CatatanLabel = QtWidgets.QLabel(self.riwayatFrame)
+        # font = QtGui.QFont()
+        # font.setPointSize(9)
+        # font.setUnderline(True)
+        # self.CatatanLabel.setFont(font)
+        # self.CatatanLabel.setStyleSheet("color:rgb(12, 190, 255)")
+        # self.CatatanLabel.setObjectName(newCatatan)
+        # self.CatatanLabel.setText("Catatan")
+        # self.verticalLayout_4.addWidget(self.CatatanLabel)
+
+        self.hapusButton = QtWidgets.QPushButton(self.riwayatFrame, clicked = lambda: self.openHapus(riwayat))
+        self.hapusButton.setObjectName(newHapus)
+        self.hapusButton.setGeometry(QtCore.QRect(280, 130, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setUnderline(True)
+        self.hapusButton.setFont(font)
+        self.hapusButton.setText("Hapus")
+        self.hapusButton.setStyleSheet("border: none; color:rgb(12, 190, 255);")
+        self.verticalLayout_4.addWidget(self.hapusButton, 0, QtCore.Qt.AlignLeft)
+
+        self.verticalLayout_3.addWidget(self.riwayatFrame, QtCore.Qt.AlignTop)
+        self.riwayatFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        self.riwayatFrame.setMinimumSize(QtCore.QSize(745, 0))
+        self.riwayatFrame.setMaximumSize(QtCore.QSize(745, 50))
+        self.riwayatFrame.setStyleSheet("background-color: white;")
+        self.riwayatFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.riwayatFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.riwayatFrame.setObjectName(newRiwayat)
+        self.verticalLayout_3.addWidget(self.riwayatFrame)
+        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.addStretch()
+
+        setattr(self, newRiwayat, self.riwayatFrame)
+
+    def retranslateUi(self, Riwayat):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Edit Itinerary Planner"))
-        self.textEdit.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.875pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Gedung Sate</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Kota Bandung, Indonesia</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Mar 28, 2023</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Mobil</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Ubah</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Hapus</p></body></html>"))
-        self.textEdit_2.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.875pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Taman Hutan Raya</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Kota Bandung, Indonesia</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Mar 29, 2023</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Motor</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Ubah</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Hapus</p></body></html>"))
-        self.textEdit_3.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.875pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Bandung Electronic Center</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Kota Bandung, Indonesia</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Mar 29, 2023</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Motor</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Ubah</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Hapus</p></body></html>"))
-        self.pushButton.setText(_translate("Form", "X"))
+        Riwayat.setWindowTitle(_translate("Riwayat", "MainWindow"))
+        # self.pushButton.setText(_translate("Riwayat", "X"))
+        self.label.setText(_translate("Riwayat", "Edit Itinerary Planner"))
+        # self.pushButton_2.setText(_translate("Riwayat", "PushButton"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
+    Riwayat = QtWidgets.QMainWindow()
+    ui = Ui_Edit()
+    ui.setupUi(Riwayat)
+    Riwayat.show()
     sys.exit(app.exec_())

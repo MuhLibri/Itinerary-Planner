@@ -72,7 +72,7 @@ class Ui_Transportasi(object):
         self.lineEdit.setText("")
         self.lineEdit.setClearButtonEnabled(True)
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.textChanged.connect(self.searchButtonClicked)
+        # self.lineEdit.textChanged.connect(self.searchButtonClicked)
 
         self.lineEdit_2 = QtWidgets.QLineEdit(self.frame)
         self.lineEdit_2.setGeometry(QtCore.QRect(70, 90, 641, 31))
@@ -80,7 +80,7 @@ class Ui_Transportasi(object):
         self.lineEdit_2.setText("")
         self.lineEdit_2.setClearButtonEnabled(True)
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_2.textChanged.connect(self.searchButtonClicked)
+        # self.lineEdit_2.textChanged.connect(self.searchButtonClicked)
 
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
         self.scrollArea.setGeometry(QtCore.QRect(0, 120, 801, 461))
@@ -93,7 +93,7 @@ class Ui_Transportasi(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.pushButton_2.clicked.connect(self.searchButtonClicked)
+        self.pushButton_2.clicked.connect(lambda: self.searchButtonClicked(MainWindow))
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -182,7 +182,7 @@ class Ui_Transportasi(object):
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "Cari Lokasi Berangkat"))
         self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "Cari Lokasi Tujuan"))
 
-    def searchButtonClicked(self):
+    def searchButtonClicked(self, MainWindow):
         searchTextBerangkat=self.lineEdit.text()
         searchTextTujuan=self.lineEdit_2.text()
         for cnt in reversed(range(self.verticalLayout_3.count())):
@@ -195,11 +195,14 @@ class Ui_Transportasi(object):
                     widget.deleteLater()
         if searchTextBerangkat!="" and searchTextTujuan!="":
             searchedTransportasi=Database.Database.search("Transportasi",starts_with=True,LokasiBerangkat=searchTextBerangkat, LokasiTujuan=searchTextTujuan)
-            rataan=hitungRataan(searchedTransportasi)
-            self.createNewWidget("Rataan","Lokasi Berangkat: "+searchTextBerangkat,"Lokasi Berangkat: "+searchTextTujuan,str(rataan))
-            for el in searchedTransportasi:
-                self.createNewWidget(el[1],el[2],el[3],str(el[4]))
-                self.retranslateUi(MainWindow)
+            if(len(searchedTransportasi)==0):
+                self.createNewWidget("Tidak ada transportasi yang ditemukan","","","")
+            else:
+                rataan=hitungRataan(searchedTransportasi)
+                self.createNewWidget("Rataan","Lokasi Berangkat: "+searchTextBerangkat,"Lokasi Berangkat: "+searchTextTujuan,str(rataan))
+                for el in searchedTransportasi:
+                    self.createNewWidget(el[1],el[2],el[3],str(el[4]))
+                    self.retranslateUi(MainWindow)
         elif searchTextBerangkat!="" and searchTextTujuan=="":
             searchedTransportasi=Database.Database.search("Transportasi",starts_with=True,LokasiBerangkat=searchTextBerangkat)
             for el in searchedTransportasi:
