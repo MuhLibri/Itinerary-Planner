@@ -54,7 +54,6 @@ class Database:
             if (bool(attr)):
                 if starts_with or contains:
                     attrs = ' AND '.join([s+' LIKE "'+'%'*contains+attr[s]+'%"' for s in attr.keys()])
-                    print(attrs)
                 else:
                     ignore_case_q = ignore_case*" COLLATE NOCASE"
                     attrs = ','.join([s+'=:'+s for s in attr.keys()])
