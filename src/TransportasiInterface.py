@@ -195,11 +195,14 @@ class Ui_Transportasi(object):
                     widget.deleteLater()
         if searchTextBerangkat!="" and searchTextTujuan!="":
             searchedTransportasi=Database.Database.search("Transportasi",starts_with=True,LokasiBerangkat=searchTextBerangkat, LokasiTujuan=searchTextTujuan)
-            rataan=hitungRataan(searchedTransportasi)
-            self.createNewWidget("Rataan","Lokasi Berangkat: "+searchTextBerangkat,"Lokasi Berangkat: "+searchTextTujuan,str(rataan))
-            for el in searchedTransportasi:
-                self.createNewWidget(el[1],el[2],el[3],str(el[4]))
-                self.retranslateUi(MainWindow)
+            if(len(searchedTransportasi)==0):
+                self.createNewWidget("Tidak ada transportasi yang ditemukan","","","")
+            else:
+                rataan=hitungRataan(searchedTransportasi)
+                self.createNewWidget("Rataan","Lokasi Berangkat: "+searchTextBerangkat,"Lokasi Berangkat: "+searchTextTujuan,str(rataan))
+                for el in searchedTransportasi:
+                    self.createNewWidget(el[1],el[2],el[3],str(el[4]))
+                    self.retranslateUi(MainWindow)
         elif searchTextBerangkat!="" and searchTextTujuan=="":
             searchedTransportasi=Database.Database.search("Transportasi",starts_with=True,LokasiBerangkat=searchTextBerangkat)
             for el in searchedTransportasi:
