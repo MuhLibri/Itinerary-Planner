@@ -4,10 +4,11 @@
 
 # Daftar Tabel
 1. Tabel Daerah
-|Atribut               |Tipe      |Boleh NULL  |Deskripsi            |
-|   ---------          |   ---------    |    ---------     |    ---------              |
-|NamaDaerah            |TEXT      |Tidak       |                     |
-|InformasiDaerah       |TEXT      |BOLEH       |                     |
+
+| Atribut              |Tipe      | Atribut |Tipe    |
+| ------               | ------   | ------  | ------ |
+|NamaDaerah            |TEXT      |Tidak    |        |
+|InformasiDaerah       |TEXT      |BOLEH    |        |
 
 2. Tabel ObjekWisata
 |Atribut               |Tipe      |Boleh NULL  |Deskripsi            |
