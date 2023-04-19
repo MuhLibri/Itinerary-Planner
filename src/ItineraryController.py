@@ -9,7 +9,7 @@ class ItineraryController:
     def createIdItinerary():
         num = Database.count("Riwayat") + 1
         idItinerary = ((6 - len(str(num))) * '0') + str(num)
-        Database.insert("Riwayat", IdItinerary=idItinerary, TanggalBuat=datetime.datetime.today(), Catatan='')
+        Database.insert("Riwayat", IdItinerary=idItinerary, TanggalBuat=datetime.datetime.today().strftime('%d/%m/%Y'), Catatan='')
         return idItinerary
 
     @staticmethod

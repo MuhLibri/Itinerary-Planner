@@ -9,10 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from RiwayatController import *
 
 class Ui_Riwayat(object):
     riwayatCount = 0
+    listRiwayat = RiwayatController.getListRiwayat()
     def setupUi(self, Riwayat):
         Riwayat.setObjectName("Riwayat")
         Riwayat.resize(800, 578)
@@ -39,8 +40,8 @@ class Ui_Riwayat(object):
 "QPushButton:pressed{\n"
 "background-color: rgb(25, 105, 152);\n"
 "}")
-        self.pushButton.setFlat(True)
-        self.pushButton.setObjectName("pushButton")
+        #self.pushButton.setFlat(True)
+        #self.pushButton.setObjectName("pushButton")
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setGeometry(QtCore.QRect(220, 10, 371, 50))
         self.label.setStyleSheet("QLabel{\n"
@@ -66,9 +67,9 @@ class Ui_Riwayat(object):
         self.verticalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
         self.verticalLayout_3.setContentsMargins(0, 3, 0, -1)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.pushButton_2 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.verticalLayout_3.addWidget(self.pushButton_2)
+        #self.pushButton_2 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        #self.pushButton_2.setObjectName("pushButton_2")
+        #self.verticalLayout_3.addWidget(self.pushButton_2)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         Riwayat.setCentralWidget(self.centralwidget)
 
@@ -76,15 +77,16 @@ class Ui_Riwayat(object):
         QtCore.QMetaObject.connectSlotsByName(Riwayat)
     
 
+        for elmt in self.listRiwayat:
+            self.createNewWidget(elmt)
+        #self.pushButton_2.clicked.connect(self.createNewWidget)
 
-        self.pushButton_2.clicked.connect(self.createNewWidget)
-
-    def createNewWidget(self):
+    def createNewWidget(self, riwayat):
         newRiwayat = "riwayatFrame" + str(self.riwayatCount)
         newVertical = "verticalName" + str(self.riwayatCount)
-        newTitle = "title" + str(self.riwayatCount)
-        newDuration = "duration" + str(self.riwayatCount)
-        newDestination = "destination" + str(self.riwayatCount)
+        newTitle = "{} Hari di {}".format(RiwayatController.getDuration(riwayat), RiwayatController.getDaerahItinerary(riwayat)) #"Perjalanan {}".format(int(riwayat.lembarItinerary.lembarItinerary[0].idItinerary)) #"title" + str(self.riwayatCount)
+        newDuration = "{} - {}".format(RiwayatController.getStartDate(riwayat), RiwayatController.getEndDate(riwayat))  #"duration" + str(self.riwayatCount)
+        newDestination = "{}".format(', '.join([str(elem) for elem in RiwayatController.getListObjekWisata(riwayat)]))  #"destination" + str(self.riwayatCount)
         newUbah = "ubah" + str(self.riwayatCount)
         newCatatan = "catatan" + str(self.riwayatCount)
         self.riwayatCount += 1
@@ -176,9 +178,9 @@ class Ui_Riwayat(object):
     def retranslateUi(self, Riwayat):
         _translate = QtCore.QCoreApplication.translate
         Riwayat.setWindowTitle(_translate("Riwayat", "MainWindow"))
-        self.pushButton.setText(_translate("Riwayat", "X"))
+        #self.pushButton.setText(_translate("Riwayat", "X"))
         self.label.setText(_translate("Riwayat", "Riwayat Itinerary Planner"))
-        self.pushButton_2.setText(_translate("Riwayat", "PushButton"))
+        #self.pushButton_2.setText(_translate("Riwayat", "PushButton"))
 
 
 if __name__ == "__main__":
