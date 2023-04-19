@@ -1,7 +1,4 @@
-| header | header |
-| ------ | ------ |
-|        |        |
-|        |        |# IF2250-2023-K01-14-ItineraryPlanner
+# IF2250-2023-K01-14-ItineraryPlanner
 
 
 
