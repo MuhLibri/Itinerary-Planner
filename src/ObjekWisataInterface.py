@@ -184,7 +184,7 @@ class Ui_ObjekWisata(object):
                     # widget will be None if the item is a layout
                     widget.deleteLater()
         if searchText!="":
-            searchedObjekWisata=Database.Database.search("ObjekWisata",NamaObjekWisata=searchText)
+            searchedObjekWisata=Database.Database.search("ObjekWisata",True,True,True,NamaObjekWisata=searchText)
             for el in searchedObjekWisata:
                 self.createNewWidget(el[0],el[1],el[2])
                 self.retranslateUi(ObjekWisata)
