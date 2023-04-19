@@ -1,5 +1,15 @@
 # IF2250-2023-K01-14-ItineraryPlanner
 
+# Tentang ItineraryPlanner
+    Aplikasi ItineraryPlanner, merupakan aplikasi dengan lingkup personal yang dibuat untuk merancang jadwal liburan. Aplikasi ini dapat menampilkan list destinasi wisata serta semua objek wisata yang ada pada destinasi wisata tersebut. Aplikasi juga dapat menampilkan semua moda transportasi yang tersedia beserta harganya untuk menuju ke destinasi wisata. Dengan menggunakan fitur-fitur tersebut, ItineraryPlanner dapat digunakan untuk merancang rencana perjalanan untuk pengguna. Selain itu, rencana perjalanan yang telah dibuat dapat disimpan sebagai riwayat perjalanan dan dapat dilihat kembali oleh pengguna. Pengguna juga dapat menambahkan catatan pribadi pada riwayat tersebut.
+
+# Requirement
+Sebelum menjalankan aplikasi ItineraryPlanner, pengguna harus menginstall terlebih dahulu menginstall python dan PyQt
+
+# Cara menjalankan
+Untuk menjalankan aplikasi ItineraryPlanner, pengguna cukup membuka terminal pada folder src. Lalu, pengguna dapat mengetikkan ```python StartPage.py``` dan aplikasi pun dapat berjalan.
+
+# Modul dan Pembagian Kerja
 
 
 # Daftar Tabel
