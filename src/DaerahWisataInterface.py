@@ -83,7 +83,7 @@ class Ui_DaerahWisata(object):
         self.lineEdit.setText("")
         self.lineEdit.setClearButtonEnabled(True)
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.textChanged.connect(self.searchButtonClicked)
+        # self.lineEdit.textChanged.connect(self.searchButtonClicked)
         MainWindow.setCentralWidget(self.centralwidget)
         #self.pushButton_2.clicked.connect(self.searchButtonClicked)
 

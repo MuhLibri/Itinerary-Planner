@@ -72,7 +72,7 @@ class Ui_Transportasi(object):
         self.lineEdit.setText("")
         self.lineEdit.setClearButtonEnabled(True)
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.textChanged.connect(self.searchButtonClicked)
+        # self.lineEdit.textChanged.connect(self.searchButtonClicked)
 
         self.lineEdit_2 = QtWidgets.QLineEdit(self.frame)
         self.lineEdit_2.setGeometry(QtCore.QRect(70, 90, 641, 31))
@@ -80,7 +80,7 @@ class Ui_Transportasi(object):
         self.lineEdit_2.setText("")
         self.lineEdit_2.setClearButtonEnabled(True)
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_2.textChanged.connect(self.searchButtonClicked)
+        # self.lineEdit_2.textChanged.connect(self.searchButtonClicked)
 
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
         self.scrollArea.setGeometry(QtCore.QRect(0, 120, 801, 461))

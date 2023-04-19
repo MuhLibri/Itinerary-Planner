@@ -69,7 +69,7 @@ class Ui_ObjekWisata(object):
         self.lineEdit.setText("")
         self.lineEdit.setClearButtonEnabled(True)
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.textChanged.connect(self.searchButtonClicked)
+        # self.lineEdit.textChanged.connect(self.searchButtonClicked)
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         self.label.setScaledContents(False)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
