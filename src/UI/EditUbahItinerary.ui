@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>640</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(42, 174, 255);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="closeButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>60</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+color: white;
+	background-color: rgb(42, 174, 255);
+	border: none;
+font: 16pt;
+}
+QPushButton:hover{
+background-color: rgb(35, 148, 213);
+}
+QPushButton:pressed{
+background-color: rgb(25, 105, 152);
+}</string>
+    </property>
+    <property name="text">
+     <string>X</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>15</y>
+      <width>260</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+background-color: rgb(42, 174, 255);
+font: 16pt;
+color: white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Ubah Itinerary Planner</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="frame_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>80</y>
+     <width>641</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="submitButton">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>330</y>
+      <width>50</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+color: white;
+background-color: rgb(150, 150, 150);
+border-color: rgb(42, 174, 255);
+font: 16pt;
+border-radius: 25px;
+}
+QPushButton:hover{
+background-color: rgb(116, 116, 116);
+}
+QPushButton:pressed{
+background-color: rgb(0,0,0);
+}</string>
+    </property>
+    <property name="text">
+     <string>+</string>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_3">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>20</y>
+      <width>531</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLineEdit" name="addDaerahWisata">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>500</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 2px solid rgb(0, 0, 0);
+	border-radius: 10px;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>Masukkan Daerah Wisata</string>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="addObjekWisata">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>500</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 2px solid rgb(0, 0, 0);
+	border-radius: 10px;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>Masukkan Objek Wisata</string>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="tanggalKunjunganDate">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>110</y>
+       <width>370</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QDateEdit
+{
+border : 2px solid black;
+background-color : white;
+padding : 5px;
+	border-left-color: rgb(255, 255, 255);
+border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
+}</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="dateTime">
+      <datetime>
+       <hour>0</hour>
+       <minute>0</minute>
+       <second>0</second>
+       <year>2023</year>
+       <month>1</month>
+       <day>1</day>
+      </datetime>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="addTransportasi">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>200</y>
+       <width>500</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 2px solid rgb(0, 0, 0);
+	border-radius: 10px;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>Pilih Transportasi</string>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="tanggalKunjunganLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>131</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+border-Left: 2px solid black;
+border-Top: 2px solid black;
+border-Bottom: 2px solid black;
+border-bottom-left-radius: 10px;
+border-top-left-radius: 10px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Tanggal Kunjungan:</string>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="tanggalSelesaiDate">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>155</y>
+       <width>370</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QDateEdit
+{
+border : 2px solid black;
+background-color : white;
+padding : 5px;
+	border-left-color: rgb(255, 255, 255);
+border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
+}</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="dateTime">
+      <datetime>
+       <hour>0</hour>
+       <minute>0</minute>
+       <second>0</second>
+       <year>2023</year>
+       <month>1</month>
+       <day>1</day>
+      </datetime>
+     </property>
+    </widget>
+    <widget class="QLabel" name="tanggalSelesaiLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>155</y>
+       <width>131</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+border-Left: 2px solid black;
+border-Top: 2px solid black;
+border-Bottom: 2px solid black;
+border-bottom-left-radius: 10px;
+border-top-left-radius: 10px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Tanggal Selesai:</string>
+     </property>
+    </widget>
+    <zorder>addDaerahWisata</zorder>
+    <zorder>addObjekWisata</zorder>
+    <zorder>addTransportasi</zorder>
+    <zorder>tanggalKunjunganDate</zorder>
+    <zorder>tanggalKunjunganLabel</zorder>
+    <zorder>tanggalSelesaiDate</zorder>
+    <zorder>tanggalSelesaiLabel</zorder>
+   </widget>
+   <zorder>frame_3</zorder>
+   <zorder>submitButton</zorder>
+  </widget>
+  <zorder>frame_2</zorder>
+  <zorder>frame</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
