@@ -20,7 +20,7 @@ class Ui_Transportasi(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(0, 0, 801, 80))
+        self.frame.setGeometry(QtCore.QRect(0, 0, 801, 121))
         self.frame.setStyleSheet("background-color: rgb(42, 174, 255);")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -52,7 +52,7 @@ class Ui_Transportasi(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.pushButton_2 = QtWidgets.QPushButton(self.frame)
-        self.pushButton_2.setGeometry(QtCore.QRect(710, 47, 93, 41))
+        self.pushButton_2.setGeometry(QtCore.QRect(710, 47, 93, 71))
         self.pushButton_2.setStyleSheet("QPushButton{\n"
 "color: white;\n"
 "    background-color: rgb(42, 174, 255);\n"
@@ -72,12 +72,20 @@ class Ui_Transportasi(object):
         self.lineEdit.setText("")
         self.lineEdit.setClearButtonEnabled(True)
         self.lineEdit.setObjectName("lineEdit")
+
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.frame)
+        self.lineEdit_2.setGeometry(QtCore.QRect(70, 90, 641, 31))
+        self.lineEdit_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.lineEdit_2.setText("")
+        self.lineEdit_2.setClearButtonEnabled(True)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
-        self.scrollArea.setGeometry(QtCore.QRect(0, 80, 801, 501))
+        self.scrollArea.setGeometry(QtCore.QRect(0, 120, 801, 461))
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 799, 499))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 799, 459))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -169,10 +177,12 @@ class Ui_Transportasi(object):
         self.pushButton.setText(_translate("MainWindow", "X"))
         self.label.setText(_translate("MainWindow", "Transportasi"))
         self.pushButton_2.setText(_translate("MainWindow", "Search!"))
-        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Cari Transportasi"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Cari Lokasi Berangkat"))
+        self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "Cari Lokasi Tujuan"))
 
     def searchButtonClicked(self):
-        searchText=self.lineEdit.text()
+        searchTextBerangkat=self.lineEdit.text()
+        searchTextTujuan=self.lineEdit_2.text()
         for cnt in reversed(range(self.verticalLayout_3.count())):
             # takeAt does both the jobs of itemAt and removeWidget
             # namely it removes an item and returns it
@@ -181,15 +191,42 @@ class Ui_Transportasi(object):
                 if widget is not None: 
                     # widget will be None if the item is a layout
                     widget.deleteLater()
-        if searchText!="":
-            searchedObjekWisata=Database.Database.search("Transportasi",NamaTransportasi=searchText)
-            for el in searchedObjekWisata:
+        if searchTextBerangkat!="" and searchTextTujuan!="":
+            searchedTransportasi=Database.Database.search("Transportasi",True,True,True,LokasiBerangkat=searchTextBerangkat, LokasiTujuan=searchTextTujuan)
+            rataan=hitungRataan(searchedTransportasi)
+            self.createNewWidget("Rataan","Lokasi Berangkat: "+searchTextBerangkat,"Lokasi Berangkat: "+searchTextTujuan,str(rataan))
+            for el in searchedTransportasi:
+                self.createNewWidget(el[1],el[2],el[3],str(el[4]))
+                self.retranslateUi(MainWindow)
+        elif searchTextBerangkat!="" and searchTextTujuan=="":
+            searchedTransportasi=Database.Database.search("Transportasi",True,True,True,LokasiBerangkat=searchTextBerangkat)
+            for el in searchedTransportasi:
+                self.createNewWidget(el[1],el[2],el[3],str(el[4]))
+                self.retranslateUi(MainWindow)
+        elif searchTextBerangkat=="" and searchTextTujuan!="":
+            searchedTransportasi=Database.Database.search("Transportasi",True,True,True,LokasiTujuan=searchTextTujuan)
+            for el in searchedTransportasi:
                 self.createNewWidget(el[1],el[2],el[3],str(el[4]))
                 self.retranslateUi(MainWindow)
         else:
             for el in self.transportTable:
                 self.createNewWidget(el[1],el[2],el[3],str(el[4]))
                 self.retranslateUi(MainWindow)
+        # if searchText!="":
+        #     searchedObjekWisata=Database.Database.search("Transportasi",NamaTransportasi=searchText)
+        #     for el in searchedObjekWisata:
+        #         self.createNewWidget(el[1],el[2],el[3],str(el[4]))
+        #         self.retranslateUi(MainWindow)
+        # else:
+        #     for el in self.transportTable:
+        #         self.createNewWidget(el[1],el[2],el[3],str(el[4]))
+        #         self.retranslateUi(MainWindow)
+
+def hitungRataan(searchedTransport):
+        totalHarga=0
+        for el in searchedTransport:
+                totalHarga+=el[4]
+        return totalHarga/len(searchedTransport)
 
 if __name__ == "__main__":
     import sys

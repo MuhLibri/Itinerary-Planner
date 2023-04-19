@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import Database
+import DaerahWisataDialog
+import functools
 
 class Ui_DaerahWisata(object):
     daerahWisataTable=Database.Database.search("Daerah")
@@ -102,8 +104,8 @@ class Ui_DaerahWisata(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.daerahWisataFrame.sizePolicy().hasHeightForWidth())
         self.daerahWisataFrame.setSizePolicy(sizePolicy)
-        self.daerahWisataFrame.setMinimumSize(QtCore.QSize(800, 150))
-        self.daerahWisataFrame.setMaximumSize(QtCore.QSize(800, 150))
+        self.daerahWisataFrame.setMinimumSize(QtCore.QSize(800, 200))
+        self.daerahWisataFrame.setMaximumSize(QtCore.QSize(800, 200))
         self.daerahWisataFrame.setStyleSheet("#"+newDaerahWisata+"{\n"
 "background-color: white;\n"
 "border: 1px solid black;\n"
@@ -131,6 +133,19 @@ class Ui_DaerahWisata(object):
         self.informasiDaerahWisataLabel.setObjectName(newInformasiDaerahWisata)
         self.informasiDaerahWisataLabel.setText(newInformasiDaerahWisata)
         self.verticalLayout.addWidget(self.informasiDaerahWisataLabel)
+
+        self.pushButton3 = QtWidgets.QPushButton(self.daerahWisataFrame)
+        self.pushButton3.setGeometry(QtCore.QRect(600, 50, 151, 28))
+        self.pushButton3.setObjectName(namaDaerahWisata)
+        print(namaDaerahWisata)
+        # print(self.pushButton3.objectName)
+        self.pushButton3.setText(QtCore.QCoreApplication.translate("Form", "Lihat Objek Wisata!"))
+        # try:
+        # self.pushButton3.clicked.connect(self.showObjekWisata)
+        self.pushButton3.clicked.connect(functools.partial(self.showObjekWisata, namaDaerahWisata))
+        # except:
+        #         pass
+        self.verticalLayout.addChildWidget(self.pushButton3)
 
         self.verticalLayout_3.addWidget(self.daerahWisataFrame,QtCore.Qt.AlignTop)
         self.daerahWisataFrame=QtWidgets.QFrame(self.scrollAreaWidgetContents)
@@ -166,7 +181,7 @@ class Ui_DaerahWisata(object):
                     # widget will be None if the item is a layout
                     widget.deleteLater()
         if searchText!="":
-            searchedObjekWisata=Database.Database.search("Daerah",NamaDaerah=searchText)
+            searchedObjekWisata=Database.Database.search("Daerah",True,True,True,NamaDaerah=searchText)
             for el in searchedObjekWisata:
                 self.createNewWidget(el[0],el[1])
                 self.retranslateUi(MainWindow)
@@ -174,6 +189,14 @@ class Ui_DaerahWisata(object):
             for e in self.daerahWisataTable:
                 self.createNewWidget(e[0],e[1])
                 self.retranslateUi(MainWindow)
+
+    def showObjekWisata(self,namaDaerah):
+        dialog=QtWidgets.QDialog()
+        # dialog.setModal(True)
+        ui=DaerahWisataDialog.Ui_DaerahWisataDialog()
+        ui.setupUi(dialog,namaDaerah)
+        dialog.exec_()
+        dialog.show()
 
 if __name__ == "__main__":
     import sys
