@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_UbahWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(799, 597)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -55,7 +55,7 @@ class Ui_UbahWindow(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalFrame_2 = QtWidgets.QFrame(self.frame)
-        self.verticalFrame_2.setGeometry(QtCore.QRect(-1, 70, 801, 531))
+        self.verticalFrame_2.setGeometry(QtCore.QRect(-1, 70, 801, 441))
         self.verticalFrame_2.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.verticalFrame_2.setAutoFillBackground(False)
         self.verticalFrame_2.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -79,7 +79,7 @@ class Ui_UbahWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_3.setFont(font)
-        self.label_3.setAutoFillBackground(True)
+        self.label_3.setAutoFillBackground(False)
         self.label_3.setTextFormat(QtCore.Qt.PlainText)
         self.label_3.setScaledContents(True)
         self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
@@ -92,6 +92,8 @@ class Ui_UbahWindow(object):
         self.lineEdit.setStyleSheet("border: 3px solid;\n"
 "border-radius: 20px;\n"
 "border-color: rgb(42, 174, 255);")
+        self.lineEdit.setText("")
+        self.lineEdit.setCursorPosition(0)
         self.lineEdit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.lineEdit.setObjectName("lineEdit")
         self.verticalLayout_2.addWidget(self.lineEdit, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
@@ -161,6 +163,19 @@ class Ui_UbahWindow(object):
         self.lineEdit_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.verticalLayout_2.addWidget(self.lineEdit_3, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.frame_2 = QtWidgets.QFrame(self.frame)
+        self.frame_2.setGeometry(QtCore.QRect(-1, 509, 801, 91))
+        self.frame_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.pushButton_2 = QtWidgets.QPushButton(self.frame_2)
+        self.pushButton_2.setGeometry(QtCore.QRect(330, 10, 131, 41))
+        self.pushButton_2.setStyleSheet("border: none;\n"
+"border-radius: 20px;\n"
+"color: rgb(255, 255, 255);\n"
+"background-color: rgb(42, 174, 255);")
+        self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout.addWidget(self.frame)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -175,13 +190,14 @@ class Ui_UbahWindow(object):
         self.label_3.setText(_translate("MainWindow", "Change Title"))
         self.label_2.setText(_translate("MainWindow", "Change Duration"))
         self.label_4.setText(_translate("MainWindow", "Change Destination"))
+        self.pushButton_2.setText(_translate("MainWindow", "Save"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_UbahWindow()
+    ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
