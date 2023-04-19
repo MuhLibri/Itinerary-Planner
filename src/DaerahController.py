@@ -4,7 +4,7 @@ from Database import *
 class DaerahController:
     @staticmethod
     def getDaerah(namaDaerah):
-        return Database.search("Daerah", NamaDaerah=namaDaerah)
+        return Database.search("Daerah", starts_with=True, NamaDaerah=namaDaerah)
     
     @staticmethod
     def getListDaerahWisata():
