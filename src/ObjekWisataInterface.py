@@ -69,6 +69,7 @@ class Ui_ObjekWisata(object):
         self.lineEdit.setText("")
         self.lineEdit.setClearButtonEnabled(True)
         self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit.textChanged.connect(self.searchButtonClicked)
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         self.label.setScaledContents(False)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
@@ -184,7 +185,7 @@ class Ui_ObjekWisata(object):
                     # widget will be None if the item is a layout
                     widget.deleteLater()
         if searchText!="":
-            searchedObjekWisata=Database.Database.search("ObjekWisata",True,True,True,NamaObjekWisata=searchText)
+            searchedObjekWisata=Database.Database.search("ObjekWisata",contains=True,NamaObjekWisata=searchText)
             for el in searchedObjekWisata:
                 self.createNewWidget(el[0],el[1],el[2])
                 self.retranslateUi(ObjekWisata)
