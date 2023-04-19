@@ -19,26 +19,29 @@
 |InformasiObjekWisata  |TEXT      |Boleh        |
 
 3. Tabel Transposi
-| Atribut              |Tipe      | Atribut |Tipe    |
-| ------               | ------   | ------  | ------ |
-|IdTransportasi        |TEXT      |Tidak    |        |
-|NamaTransportasi      |TEXT      |Tidak    |        |
-|LokasiBerangkat       |TEXT      |Tidak    |        |
-|LokasiTujuan          |TEXT      |Tidak    |        |
-|Harga                 |INTEGER   |Tidak    |        |
+
+|Atribut               |Tipe      |Boleh Null   |
+| ------               | ------   | ------      |       
+|IdTransportasi        |TEXT      |Tidak        |
+|NamaTransportasi      |TEXT      |Tidak        |
+|LokasiBerangkat       |TEXT      |Tidak        |
+|LokasiTujuan          |TEXT      |Tidak        |
+|Harga                 |INTEGER   |Tidak        |
 
 4. Tabel Itinerary
-| Atribut              |Tipe      | Atribut |Tipe    |
-| ------               | ------   | ------  | ------ |
-|IdItinerary           |TEXT      |Tidak    |        |
-|WaktuAwal             |TEXT      |Tidak    |        |
-|WaktuAkhir            |TEXT      |Tidak    |        |
-|NamaObjekWisata       |TEXT      |Tidak    |        |
-|IdTransportasi        |TEXT      |Tidak    |        |
+
+|Atribut               |Tipe      |Boleh Null   |
+| ------               | ------   | ------      |
+|IdItinerary           |TEXT      |Tidak        |
+|WaktuAwal             |TEXT      |Tidak        |
+|WaktuAkhir            |TEXT      |Tidak        |
+|NamaObjekWisata       |TEXT      |Tidak        |
+|IdTransportasi        |TEXT      |Tidak        |
 
 5. Tabel Riwayat
-| Atribut              |Tipe      | Atribut |Tipe    |
-| ------               | ------   | ------  | ------ |
-|IdItinerary           |TEXT      |Tidak    |        |
-|TanggalBuat           |TEXT      |Tidak    |        |
-|Catatan               |TEXT      |Boleh    |        |
+
+|Atribut               |Tipe      |         |
+| ------               | ------   | ------  |
+|IdItinerary           |TEXT      |Tidak    |
+|TanggalBuat           |TEXT      |Tidak    |
+|Catatan               |TEXT      |Boleh    |
