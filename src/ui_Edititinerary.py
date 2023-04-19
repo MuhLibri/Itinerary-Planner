@@ -25,7 +25,7 @@ class Ui_Edit(object):
         self.ubahWindow.show()
 
     def openHapus(self, riwayat):
-        print("BELUM")
+        RiwayatController.deleteRiwayat(riwayat.lembarItinerary.lembarItinerary[0].idItinerary)
         # self.catatanWindow = QtWidgets.QMainWindow()
         # self.catatanUi = Ui_CatatanWindow()
         # self.catatanUi.setupUi(self.catatanWindow, riwayat)
