@@ -48,7 +48,7 @@ class Ui_ObjekWisata(object):
 "color: white;\n"
 "}")
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        self.pushButton_2 = QtWidgets.QPushButton(self.frame)
+        self.pushButton_2 = QtWidgets.QPushButton(self.frame, clicked = lambda: self.searchButtonClicked(ObjekWisata))
         self.pushButton_2.setGeometry(QtCore.QRect(710, 47, 93, 41))
         self.pushButton_2.setStyleSheet("QPushButton{\n"
 "color: white;\n"
@@ -87,7 +87,7 @@ class Ui_ObjekWisata(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         ObjekWisata.setCentralWidget(self.centralwidget)
-        self.pushButton_2.clicked.connect(self.searchButtonClicked)
+        #self.pushButton_2.clicked.connect(self.searchButtonClicked)
 
         
         # self.createNewWidget(self.objekWisataTable[1][0],self.objekWisataTable[1][1],self.objekWisataTable[1][2])
@@ -174,7 +174,7 @@ class Ui_ObjekWisata(object):
         self.pushButton_2.setText(_translate("ObjekWisata", "Search!"))
         self.lineEdit.setPlaceholderText(_translate("ObjekWisata", "Cari Objek Wisata"))
     
-    def searchButtonClicked(self):
+    def searchButtonClicked(self, ObjekWisata):
         searchText=self.lineEdit.text()
         for cnt in reversed(range(self.verticalLayout_3.count())):
             # takeAt does both the jobs of itemAt and removeWidget
@@ -194,11 +194,11 @@ class Ui_ObjekWisata(object):
                 self.createNewWidget(e[0],e[1],e[2])
                 self.retranslateUi(ObjekWisata)
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ObjekWisata = QtWidgets.QMainWindow()
-    ui = Ui_ObjekWisata()
-    ui.setupUi(ObjekWisata)
-    ObjekWisata.show()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     ObjekWisata = QtWidgets.QMainWindow()
+#     ui = Ui_ObjekWisata()
+#     ui.setupUi(ObjekWisata)
+#     ObjekWisata.show()
+#     sys.exit(app.exec_())

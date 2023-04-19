@@ -11,21 +11,36 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from AddItineraryWindow import Ui_Dialog
 from ui_RiwayatInterface import Ui_Riwayat
+from DaerahWisataInterface import Ui_DaerahWisata
+from ObjekWisataInterface import Ui_ObjekWisata
 
 
 class Ui_StartWindow(object):
+    
+    searchMode = 0 #ObjekWisata: 0 ; DaerahWisata: 1
 
     def openNewItinerary(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Dialog()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        self.itineraryWindow = QtWidgets.QMainWindow()
+        self.itineraryUi = Ui_Dialog()
+        self.itineraryUi.setupUi(self.itineraryWindow)
+        self.itineraryWindow.show()
     
     def openRiwayat(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Riwayat()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        self.riwayatWindow = QtWidgets.QMainWindow()
+        self.riwayatUi = Ui_Riwayat()
+        self.riwayatUi.setupUi(self.riwayatWindow)
+        self.riwayatWindow.show()
+
+    def searchBarEnter(self):
+        self.searchWindow = QtWidgets.QMainWindow()
+        if(self.comboBox.currentText() == "Daerah Wisata"):
+                self.searchUi = Ui_DaerahWisata()
+        else:
+                self.searchUi = Ui_ObjekWisata()
+        self.searchUi.setupUi(self.searchWindow)
+        self.searchUi.lineEdit.setText(self.SearchBar.text())
+        self.searchUi.searchButtonClicked(self.searchWindow)
+        self.searchWindow.show()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -98,18 +113,8 @@ class Ui_StartWindow(object):
 "    padding-top: 5px\n"
 "}\n"
 "\n"
-"#comboBox::drop-down {\n"
-"    border: 0px;\n"
-"}\n"
-"\n"
 "#comboBox::ListView {\n"
 "    color:white;\n"
-"}\n"
-"\n"
-"#comboBox::down-arrow {\n"
-"    image: url(:/dropDownArrow.png);\n"
-"    width: 14px;\n"
-"    height: 14px;\n"
 "}\n"
 "\n"
 "QListView{\n"
@@ -119,6 +124,7 @@ class Ui_StartWindow(object):
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+        self.SearchBar.returnPressed.connect(self.searchBarEnter)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.openNewItinerary())
         self.pushButton.setGeometry(QtCore.QRect(190, 440, 151, 61))
         font = QtGui.QFont()
@@ -165,6 +171,8 @@ class Ui_StartWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
+
         
             
 
@@ -178,7 +186,6 @@ class Ui_StartWindow(object):
         self.comboBox.setItemText(1, _translate("MainWindow", "Daerah Wisata"))
         self.pushButton.setText(_translate("MainWindow", "Buat Baru"))
         self.pushButton_2.setText(_translate("MainWindow", "Riwayat"))
-#import rcs_rc
 
 
 if __name__ == "__main__":
