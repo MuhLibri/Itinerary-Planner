@@ -9,10 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import Database
+from DaerahController import DaerahController
 
 class Ui_DaerahWisata(object):
-    daerahWisataTable=Database.Database.search("Daerah")
+    daerahWisataTable=DaerahController.getDaerah('')
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 578)
@@ -81,6 +81,7 @@ class Ui_DaerahWisata(object):
         self.lineEdit.setText("")
         self.lineEdit.setClearButtonEnabled(True)
         self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit.textChanged.connect(self.searchButtonClicked)
         MainWindow.setCentralWidget(self.centralwidget)
         self.pushButton_2.clicked.connect(self.searchButtonClicked)
 
@@ -166,7 +167,7 @@ class Ui_DaerahWisata(object):
                     # widget will be None if the item is a layout
                     widget.deleteLater()
         if searchText!="":
-            searchedObjekWisata=Database.Database.search("Daerah",NamaDaerah=searchText)
+            searchedObjekWisata=DaerahController.getDaerah(searchText)
             for el in searchedObjekWisata:
                 self.createNewWidget(el[0],el[1])
                 self.retranslateUi(MainWindow)
